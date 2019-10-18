@@ -80,6 +80,7 @@
   /*MAIN*/
   .main {
       font-family: helvetica;
+      color: #fff;
       margin: 200px;
       padding: 30px;
       background-color: #111;
@@ -93,3 +94,8 @@
   .main h1{
       font-family: 'Hey August';
   }
+
+  html {
+      background-color: #111;
+  }
+  

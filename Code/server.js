@@ -63,6 +63,11 @@ app.get('/login', function(req,res){
     res.render('login');
 });
 
+//Ausgabe aboutus
+app.get('/aboutus', function(req, res){
+    res.render('aboutus');
+});
+
 ///////////////////*AUSWERTUNGEN*/////////////////////////
 //Post Auswertung des logins
 app.post('/doLogin', function(req,res){
