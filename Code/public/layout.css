@@ -1,0 +1,95 @@
+/** {
+    margin:0px;
+    padding:0px;
+    font-family: sans-serif;
+}
+
+#sidebar {
+    position:fixed;
+    width:200px;
+    height:100%;
+    background: #151515;
+    left:-200px;
+    transition: all 500ms linear;
+}
+
+#sidebar.active {
+    left:0px;
+}
+#sidebar ul li{
+    color: rgba(230,230,230,0.9);
+    list-style: none;
+    padding:15px 10px;
+    border-bottom: 1px solid rgba(100,100,100,0.3);
+
+}
+#sidebar .toggle-btn {
+    position:absolute;
+    left: 230px;
+    top:20px;
+
+}
+#sidebar .toggle-btn span {
+    display:block;
+    width: 30px;
+    height: 5px;
+    background: #151719;
+    margin: 5px 0px;
+
+}*/
+@import url('https://dl.dafont.com/dl/?f=hey_august');
+@import url('https://dl.dafont.com/dl/?f=winterthur');
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  /* Style page content */
+  .main {
+    margin-left: 160px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+  /*MAIN*/
+  .main {
+      font-family: helvetica;
+      margin: 200px;
+      padding: 30px;
+      background-color: #111;
+
+  }
+  /*@font-face { 
+      font-family: hey_august;
+      src:url(hey_august.otf)
+  }*/
+
+  .main h1{
+      font-family: 'Hey August';
+  }
