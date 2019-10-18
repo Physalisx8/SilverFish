@@ -106,3 +106,4 @@ app.post('/doRegister', function(req, res) {
 });
 
 /////////////////*FUNKTIONEN*///////////////////////////////
+/* neue js. datei anlegen*/
