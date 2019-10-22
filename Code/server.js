@@ -92,7 +92,7 @@ app.post('/doLogin', function(req,res){
     
 
 ////* Der Anfangsversuch davon, eine auswahl von fächern zu treffen und dann zu den möglichen Jahren weitergeleitet zu werden.
-app.post('/????', function(req,res){
+app.post('/', function(req,res){
     const fach = req.body.fach;
 
     let sql = `SELECT * FROM Projekte WHERE fach="${fach}"`;
