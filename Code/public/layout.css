@@ -81,63 +81,40 @@ ul li a {
     background: #262626;
     transition: .3s;
 }
-///////////////////////////////////////////////
-* {
-    margin:0px;
-    padding:0px;
-    font-family: sans-serif;
-}
+//////////////////////////////////////////////*/
 
-#sidebar {
-    position:fixed;
-    width:200px;
-    height:100%;
-    background: #151515;
-    left:-200px;
-    transition: all 500ms linear;
-}
-
-#sidebar.active {
-    left:0px;
-}
-#sidebar ul li{
-    color: rgba(230,230,230,0.9);
-    list-style: none;
-    padding:15px 10px;
-    border-bottom: 1px solid rgba(100,100,100,0.3);
-
-}
-#sidebar .toggle-btn {
-    position:absolute;
-    left: 230px;
-    top:20px;
-
-}
-#sidebar .toggle-btn span {
-    display:block;
-    width: 30px;
-    height: 5px;
-    background: #151719;
-    margin: 5px 0px;
-
-}*/
 @import url('https://dl.dafont.com/dl/?f=hey_august');
 @import url('https://dl.dafont.com/dl/?f=winterthur');
+
+html {
+    background-color:black;
+}
+.header {
+    top: 0;
+    padding: 30px;
+    text-align: center;
+    background: #818181;
+  }
+  
+  .header h1 {
+    font-size: 50px;
+  }
+  
+
 .sidenav {
     height: 100%; /* Full-height: remove this if you want "auto" height */
     width: auto; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
-    left: 0;
     background-color: rgb(51, 153, 255,0.2); /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 50px;
+    padding-top: 130px;
   }
   
-  /* The navigation menu links */
+  /* The navigation menu left */
   .sidenav a {
-    padding: 10px 8px 0px 16px;
+    padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
@@ -163,6 +140,7 @@ ul li a {
       margin: 140px;
       padding: 0;
       background-color: #111;
+      overflow: hidden;
 
   }
   /*@font-face { 
@@ -174,9 +152,7 @@ ul li a {
       font-family: 'Hey August';
   }
 
-  html {
-      background-color: #111;
-  }
+  
   
   /* Style the navigation bar */
 .navbar {
@@ -184,6 +160,7 @@ ul li a {
     padding: 0px 140px;
     background-color: rgb(51, 153, 255,0.2);
     overflow: auto;
+    z-index:-1;
   }
   
   /* Navbar rechts */
@@ -193,6 +170,7 @@ ul li a {
     color: white;
     text-decoration: none;
     font-size: 17px;
+    z-index:1;
   }
   
   /* Navbar links on mouse-over */
