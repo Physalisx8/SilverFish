@@ -91,6 +91,20 @@ app.post('/doLogin', function(req,res){
 });
     
 
+////* Der Anfangsversuch davon, eine auswahl von fächern zu treffen und dann zu den möglichen Jahren weitergeleitet zu werden.
+app.post('/????', function(req,res){
+    const fach = req.body.fach;
+
+    let sql = `SELECT * FROM Projekte WHERE fach="${fach}"`;
+    db.get(sql, function(err, row){
+        //Session Variablen sollen in die loginresponse.ejs übergeben wrden
+        res.render('FächerJahre', {
+            fach: req.session.fach,
+           
+        });
+    });
+});
+
 //Auswertung nach der Registrierung
 app.post('/doRegister', function(req, res) {
     const name = req.body.name;
