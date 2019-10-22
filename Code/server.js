@@ -80,7 +80,8 @@ app.post('/doLogin', function(req,res){
         req.session.name = row.name;
         //Session Variablen sollen in die loginresponse.ejs übergeben wrden
         res.render('loginresponse', {
-            name: req.session.name, 
+            name: req.session.name,
+            password: req.session.name 
            
         });
     });
