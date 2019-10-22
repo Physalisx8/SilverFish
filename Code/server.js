@@ -71,6 +71,11 @@ app.get('/aboutus', function(req, res){
     res.render('aboutus');
 });
 
+//Ausgabe Profil
+app.get('/MeinProfil', function(req,res){
+    res.render('MeinProfil');
+});
+
 ///////////////////*AUSWERTUNGEN*/////////////////////////
 //Post Auswertung des logins
 app.post('/doLogin', function(req,res){
