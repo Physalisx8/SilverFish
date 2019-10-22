@@ -52,6 +52,9 @@ let db = new sqlite3.Database('login.db', function(err) {
 app.get('/main', function(req,res){
     res.render('main');
 });
+app.get('/MeinProfil',function(req,res){
+    res.render('MeinProfil');
+})
 
 //Ausgabe des Registrieren Formulars
 app.get('/signup', function(req, res){
