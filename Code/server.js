@@ -76,6 +76,16 @@ app.get('/MeinProfil', function(req,res){
     res.render('MeinProfil');
 });
 
+//Editor
+app.get('/editor', function(req,res){
+    res.render('editor');
+});
+
+//Profil anlegen
+app.get('/profilanlegen', function(req,res){
+    res.render('profilanlegen');
+});
+
 ///////////////////*AUSWERTUNGEN*/////////////////////////
 //Post Auswertung des logins
 app.post('/doLogin', function(req,res){
@@ -97,7 +107,7 @@ app.post('/doLogin', function(req,res){
     
 
 ////* Der Anfangsversuch davon, eine auswahl von fächern zu treffen und dann zu den möglichen Jahren weitergeleitet zu werden.
-app.post('/????', function(req,res){
+app.post('/', function(req,res){
     const fach = req.body.fach;
 
     let sql = `SELECT * FROM Projekte WHERE fach="${fach}"`;
