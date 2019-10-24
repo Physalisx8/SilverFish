@@ -71,6 +71,21 @@ app.get('/aboutus', function(req, res){
     res.render('aboutus');
 });
 
+//Ausgabe Profil
+app.get('/MeinProfil', function(req,res){
+    res.render('MeinProfil');
+});
+
+//Editor
+app.get('/editor', function(req,res){
+    res.render('editor');
+});
+
+//Profil anlegen
+app.get('/profilanlegen', function(req,res){
+    res.render('profilanlegen');
+});
+
 ///////////////////*AUSWERTUNGEN*/////////////////////////
 //Post Auswertung des logins
 app.post('/doLogin', function(req,res){

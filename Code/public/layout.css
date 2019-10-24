@@ -118,7 +118,11 @@ html {
   .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
+<<<<<<< HEAD
     font-family:helvetica;
+=======
+    font-family: helvetica;
+>>>>>>> master
     font-size: 25px;
     color: #818181;
     display: block;
@@ -139,11 +143,12 @@ html {
   /*//////////////////////////MAIN/////////////////////////*/
   .main {
       font-family: helvetica;
-      color: #fff;
+      color: rgba(194, 184, 184,0.8);
       margin: 140px;
       padding: 0;
-      background-color: #111;
+      background-color: black;
       overflow: hidden;
+      margin-top: 0px;
 
   }
   /*@font-face { 
@@ -164,6 +169,7 @@ html {
     background-color: rgb(69, 27, 27);
     overflow: auto;
     z-index:-1;
+   
   }
   
   /* Navbar rechts */
@@ -174,6 +180,7 @@ html {
     text-decoration: none;
     font-size: 17px;
     z-index:1;
+    
   }
   
   /* Navbar links on mouse-over */
