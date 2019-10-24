@@ -111,6 +111,7 @@ html {
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 130px;
     float:left;
+    margin-top: 240px;
     
   }
   
@@ -122,6 +123,7 @@ html {
     font-size: 25px;
     color: #818181;
     display: block;
+   
   }
   
   /* When you mouse over the navigation links, change their color */
