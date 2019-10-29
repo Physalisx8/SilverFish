@@ -9,45 +9,7 @@
         <title>Editor</title>
         <style>
         
-            div#textEditor{
-                margin: 0 auto;
-                width: 750px; 
-                height: 300px;
-            }
-
-            div#header{
-                border-bottom: none;
-                padding: 10px;
-                background-color: rgb(69, 27, 27);
-                color: rgba(194, 184, 184,0.8);
-                border-radius: 8px 8px 0px, 0px;
-            }
-            div#header > button{
-                color:rgba(194, 184, 184,0.8);
-                border: none;
-                outline:none;
-                background-color: transparent;
-                cursor: pointer;
-            }
-              div#header > button:hover{
-                color: white;
-                
-            }
-
-            div#headerbody{
-                border: 2px solid rgb(69,27,27);
-                height: 100%;
-                width: 746px;
-            }
-            iframe#theWYSIWYG{
-                height: 100%;
-                width: 100%;
-            }
-            input[type ="color"]{
-                border: none;
-                outline: none;
-                background-color: transparent;
-            }
+            
             </style>
         <script>
             window.addEventListener("load",function(){
@@ -133,9 +95,9 @@
         <a href="aboutus">About Us</a>
         
         </div>
-        <form method="POST" action="/projectsubmit" name="projectsubmit">
-        <div id="textEditor">
-            <div id="header">
+       
+        <div class="textEditor">
+            <div class="header">
                 <button id="boldB" title="Bold"><b>B</b></button>
                 <button id="italicB" title="Italic"><em>I</em></button>
                 <button id="supB" title="Superscript">X<sup>2</sup></button>
@@ -163,7 +125,7 @@
                 
             </div>
             
-            <div id="headerbody">
+            <div class="headerbody">
                 <iframe id="theWYSIWYG" name="theWYSIWYG" frameborder=0></iframe>
             </div>
         </div>
@@ -174,7 +136,6 @@
            }
         </script>
        <br>
-        <input type="submit" value="Abschicken">
-    </form>
+    
     </body>
 </html>
