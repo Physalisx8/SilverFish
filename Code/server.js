@@ -86,6 +86,14 @@ app.get('/profilanlegen', function(req,res){
     res.render('profilanlegen');
 });
 
+app.get('/FaecherJahre', function(req,res){
+    res.render('FaecherJahre');
+});
+
+app.get('/editor2', function(req,res){
+    res.render('editor2');
+});
+
 ///////////////////*AUSWERTUNGEN*/////////////////////////
 //Post Auswertung des logins
 app.post('/doLogin', function(req,res){
