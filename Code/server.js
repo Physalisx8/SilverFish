@@ -1,4 +1,6 @@
 /*Installation und Initialisierung aller Packages und Module (express, body-parser, ejs, sqlite, cookie-parser, express-session)*/
+var formidable = require('formidable');
+var fs = require('fs');
 
 const express = require('express');
 const app =  express();
@@ -91,6 +93,12 @@ else {
     res.send('du bist icht eingeloggt');
 }});
 
+//Open the Fileuploading html
+app.get('/Files', function(req,res){
+    res.sendfile(__dirname + "/Files.html");
+  });
+  
+ 
 
 
 ///////////////////*AUSWERTUNGEN*/////////////////////////
@@ -148,5 +156,19 @@ app.post('/doRegister', function(req, res) {
    
 });
 
+ //Auswertung von der Fileupload in server
+ app.post('/fileupload', function (req, res) {
+  
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+      var oldpath = files.filetoupload.path;
+      var newpath = 'C:/Users/jesus/Documents/HAW/Semester 2/Angewandte Programmierung/AP Projekt' + files.filetoupload.name;  //Name(Präfix) und speicher verzeichnis von Bild
+      fs.rename(oldpath, newpath, function (err) {
+        if (err) throw err;
+        res.write('File uploaded and moved!');
+        res.end();
+      });
+ });
+});
 /////////////////*FUNKTIONEN*///////////////////////////////
 /* neue js. datei anlegen*/
