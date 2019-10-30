@@ -158,7 +158,7 @@ html, body {
     width: 100%;
 }
 input[type ="color"]{
-    border: none;
+    border: none; 
     outline: none;
     background-color: transparent;
 }

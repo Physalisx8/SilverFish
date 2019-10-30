@@ -77,10 +77,6 @@ app.get('/MeinProfil', function(req,res){
     res.render('MeinProfil');
 });
 
-//Editor
-app.get('/editor', function(req,res){
-    res.render('editor');
-});
 
 //Profil anlegen
 app.get('/profilanlegen', function(req,res){
@@ -88,12 +84,14 @@ app.get('/profilanlegen', function(req,res){
 });
 
 app.get('/FaecherJahre', function(req,res){
+    if (typeof req.session.name !== 'undefined'){
     res.render('FaecherJahre');
-});
+}
+else {
+    res.send('du bist icht eingeloggt');
+}});
 
-app.get('/editor2', function(req,res){
-    res.render('editor2');
-});
+
 
 ///////////////////*AUSWERTUNGEN*/////////////////////////
 //Post Auswertung des logins
@@ -106,7 +104,7 @@ app.post('/doLogin', function(req,res){
         //wir wollen username&email in ner Session Variable speichern
         req.session.name = row.name;
         //Session Variablen sollen in die loginresponse.ejs übergeben wrden
-        res.render('loginresponse', {
+        res.render('main', {
             name: req.session.name,
             password: req.session.name 
            

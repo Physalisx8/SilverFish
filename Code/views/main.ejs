@@ -33,6 +33,11 @@
 <a href="login">Login</a>
 <a href="signup">Sign Up</a>
 <a href="aboutus">About Us</a>
+<% if(typeof name !== 'undefined' && name !== null){%>
+    <p>das wird nur angezeigt, wenn man eingeloggt ist.</p>
+<%} %>
+
+
 
 </div>
 
