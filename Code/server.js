@@ -162,7 +162,7 @@ app.post('/doRegister', function(req, res) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
       var oldpath = files.filetoupload.path;
-      var newpath = 'C:/Users/jesus/Documents/HAW/Semester 2/Angewandte Programmierung/AP Projekt' + files.filetoupload.name;  //Name(Präfix) und speicher verzeichnis von Bild
+      var newpath = 'C:/Users/Francie/Studium/Übergeordnete Inhalte/Git/SilverFish/Code/public/public' + files.filetoupload.name;  //Name(Präfix) und speicher verzeichnis von Bild
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
         res.write('File uploaded and moved!');
