@@ -2,6 +2,7 @@
 
 const express = require('express');
 const app =  express();
+const bcrypt = require('bcrypt');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended:true}));
@@ -125,13 +126,16 @@ app.post('/doRegister', function(req, res) {
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
-
+    let hash = bcrypt.hashSync(password, row.passoword);
     //SQL Befehl um einen neuen Eintrag der Tabelle user hinzuzufügen
-    let sql = `INSERT INTO user (name, email, password) VALUES ("${name}", "${email}", "${password}");`
+    let sql = `INSERT INTO user (name, email, password) VALUES ("${name}", "${email}", "${hash}");`
     db.run(sql, function(err) {
         if (err) { 
             console.error(err)
-        } else {
+        }if(bcrypt.compareSync(password, row.password)){
+            res.render('hello',{username:row.name, email: row.email});
+        }
+        else {
             res.send('Benutzer wurde angelegt');
         }
     });
