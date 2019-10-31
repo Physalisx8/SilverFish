@@ -107,14 +107,29 @@ app.post('/doLogin', function(req,res){
     const name = req.body.name;
     const password = req.body.password;
 
+    let sql2 = `SELECT password FROM user WHERE name="${name}"`;
     let sql = `SELECT * FROM user WHERE name="${name}"`;
-    db.get(sql, function(err, row){
+  
+    db.get(sql, function(err, row){  
+        richtigespasswort= row.password;
+        //versuche einen loginfehler zu erzeugen
+        if (richtigespasswort!= password){
+            app.post('/loginfehler',function(req,res){
+                console.log("nah");
+                
+            })};
+        });
+
+
+          db.get(sql, function(err, row){    
+          
         //wir wollen username&email in ner Session Variable speichern
         req.session.name = row.name;
+       
         //Session Variablen sollen in die loginresponse.ejs übergeben wrden
         res.render('main', {
             name: req.session.name,
-            password: req.session.name 
+            password: req.session.password,
            
         });
     });
@@ -146,6 +161,7 @@ app.post('/doRegister', function(req, res) {
     db.run(sql, function(err) {
         if (err) { 
             console.error(err)
+            app.post('/registrierungsfehler');
         }if(bcrypt.compareSync(password, row.password)){
             res.render('hello',{username:row.name, email: row.email});
         }
@@ -162,7 +178,7 @@ app.post('/doRegister', function(req, res) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
       var oldpath = files.filetoupload.path;
-      var newpath = 'C:/Users/Francie/Studium/Übergeordnete Inhalte/Git/SilverFish/Code/public/public' + files.filetoupload.name;  //Name(Präfix) und speicher verzeichnis von Bild
+      var newpath = 'C:/Users/monav/Desktop/Uni/SilverFish/Code/public/public' + files.filetoupload.name;  //Name(Präfix) und speicher verzeichnis von Bild
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
         res.write('File uploaded and moved!');
