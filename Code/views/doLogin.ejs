@@ -15,7 +15,9 @@
  
 <!--Header -->
 <div class= "header">
-<h1>Wir sind ein header </h1>
+<div class="img">
+    <img src="BannerMain.png" alt="BannerMain">
+</div>
 </div>
         
 <!-- top navigation bar-->
@@ -31,15 +33,23 @@
 <a href="login">Login</a>
 <a href="signup">Sign Up</a>
 <a href="aboutus">About Us</a>
+<% if(typeof name !== 'undefined' && name !== null){%>
+    <p>das wird nur angezeigt, wenn man eingeloggt ist.</p>
+<%} %>
+
+
+
 </div>
-
-
 
 <div class="main">
-    <h1>Erfolgreich eingeloggt</h1>
-    <p>Du bist eingeloggt als:</p>
-    <%= name%>
-        </form>
+
+      
+      <!-- main Text -->
+      
+        <h1>Willkommen</h1> <%name%>
+        <p>Du bist erfolgreich angemeldet!<br>
+     
+
+    </div>
     </body>
 </html>
-</div>

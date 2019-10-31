@@ -106,10 +106,14 @@ app.get('/Files', function(req,res){
 app.post('/doLogin', function(req,res){
     const name = req.body.name;
     const password = req.body.password;
+   
 
     let sql2 = `SELECT password FROM user WHERE name="${name}"`;
     let sql = `SELECT * FROM user WHERE name="${name}"`;
-  
+   if(typeof sql==undefined){
+        app.post("/loginfehlername");
+    }
+    else{
     db.get(sql, function(err, row){  
         richtigespasswort= row.password;
         //versuche einen loginfehler zu erzeugen
@@ -127,15 +131,15 @@ app.post('/doLogin', function(req,res){
         req.session.name = row.name;
        
         //Session Variablen sollen in die loginresponse.ejs übergeben wrden
-        res.render('main', {
+        res.render('doLogin', {
             name: req.session.name,
             password: req.session.password,
            
         });
     });
-});
-    
 
+}
+});
 ////* Der Anfangsversuch davon, eine auswahl von fächern zu treffen und dann zu den möglichen Jahren weitergeleitet zu werden.
 app.post('/', function(req,res){
     const fach = req.body.fach;
