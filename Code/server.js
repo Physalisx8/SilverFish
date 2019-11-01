@@ -110,14 +110,12 @@ app.post('/doLogin', function(req,res){
 let sql = `SELECT * FROM user WHERE name="${name}"`;
   
         db.get(sql, function(err, row){    
-          
-            //wir wollen username&email in ner Session Variable speichern
-           
            if (err){
-                res.render('loginfehlerpasswort');
+               console.log("HEEEEEEY");
+                res.render('doLogin');
                 }
             //Session Variablen sollen in die loginresponse.ejs übergeben wrden
-            res.render('doLogin', {
+            res.render('main', {
                 name: req.session.name,
                 password: req.session.password,
                
