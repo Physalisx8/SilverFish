@@ -45,9 +45,20 @@
 
       
       <!-- main Text -->
-      
-        <h1>Willkommen</h1> <%name%>
+       
+
+      <% if(typeof name !== 'undefined' && name !== null){%>
+        <h1>Willkommen</h1> <br><%name%>
         <p>Du bist erfolgreich angemeldet!<br>
+    <%} %>
+    <% if(typeof name == 'undefined' || name == null){%>
+        <h1>Diesen Username kennen wir leider noch nicht</h1> <br><br>
+        <p>Bitte versuche es erneut oder registriere dich erst unter:
+                <a href="signup">Sign Up</a><br>
+    <%} %>
+    
+
+        
      
 
     </div>

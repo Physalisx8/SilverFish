@@ -106,40 +106,34 @@ app.get('/Files', function(req,res){
 app.post('/doLogin', function(req,res){
     const name = req.body.name;
     const password = req.body.password;
-   
+ 
+let sql = `SELECT * FROM user WHERE name="${name}"`;
+  
 
-    let sql2 = `SELECT password FROM user WHERE name="${name}"`;
-    let sql = `SELECT * FROM user WHERE name="${name}"`;
-   if(typeof sql==undefined){
-        app.post("/loginfehlername");
-    }
-    else{
-    db.get(sql, function(err, row){  
-        richtigespasswort= row.password;
+    //db.run(sql, function(err){  
         //versuche einen loginfehler zu erzeugen
-        if (richtigespasswort!= password){
-            app.post('/loginfehler',function(req,res){
-                console.log("nah");
-                
-            })};
-        });
-
-
-          db.get(sql, function(err, row){    
+        db.get(sql, function(err, row){    
           
-        //wir wollen username&email in ner Session Variable speichern
-        req.session.name = row.name;
-       
-        //Session Variablen sollen in die loginresponse.ejs übergeben wrden
-        res.render('doLogin', {
-            name: req.session.name,
-            password: req.session.password,
-           
+            //wir wollen username&email in ner Session Variable speichern
+            req.session.name = row.name;
+           if (err){
+                res.render('loginfehlerpasswort');
+                }
+            //Session Variablen sollen in die loginresponse.ejs übergeben wrden
+            res.render('doLogin', {
+                name: req.session.name,
+                password: req.session.password,
+               
+            });
         });
-    });
+            
+        });
 
-}
-});
+
+         
+
+
+
 ////* Der Anfangsversuch davon, eine auswahl von fächern zu treffen und dann zu den möglichen Jahren weitergeleitet zu werden.
 app.post('/', function(req,res){
     const fach = req.body.fach;
