@@ -109,13 +109,10 @@ app.post('/doLogin', function(req,res){
  
 let sql = `SELECT * FROM user WHERE name="${name}"`;
   
-
-    //db.run(sql, function(err){  
-        //versuche einen loginfehler zu erzeugen
         db.get(sql, function(err, row){    
           
             //wir wollen username&email in ner Session Variable speichern
-            req.session.name = row.name;
+           
            if (err){
                 res.render('loginfehlerpasswort');
                 }
