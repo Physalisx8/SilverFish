@@ -107,26 +107,57 @@ app.post('/doLogin', function(req,res){
     const name = req.body.name;
     const password = req.body.password;
  
-let sql = `SELECT * FROM user WHERE name="${name}"`;
-  
-        db.get(sql, function(err, row){    
-           if (err){
-               console.log("HEEEEEEY");
-                res.render('doLogin');
+
+   let sql = `SELECT * FROM user WHERE name="${name}"`; 
+   
+   if(name=="" || password=="" ){
+       res.render('loginnichtseingegeben');
+   }
+        db.all(sql, function(err, row){
+            if(err){
+                app.post('doLoginerror');
+            }   
+            if( typeof sql==undefined){
+                app.post('doLoginerror');
+            }
+            if (name && password) {
+                connection.query('SELECT * FROM accounts WHERE name = ? AND password = ?', [name, password], function(err, results, fields) {
+                if(err){
+                     console.log("HEEEEEEY");
+                     res.render('doLoginerror');
+                };
+                if(rows.length == 0){
+                    res.render('Loginfehlername');
                 }
-            //Session Variablen sollen in die loginresponse.ejs übergeben wrden
-            res.render('main', {
-                name: req.session.name,
-                password: req.session.password,
-               
-            });
-        });
+                
+
+
+                  
+                    
+            //Session Variablen sollen in die loginresponse.ejs übergeben werden
+                
+                });
+            }
+           
+                   
+            else{ 
+     res.render('main', {
+                        name: req.session.name,
+                        password: req.session.password,
+                         });
+                      }
+
+                
+                
             
         });
+    });
+            
+        
 
 
          
-
+  
 
 
 ////* Der Anfangsversuch davon, eine auswahl von fächern zu treffen und dann zu den möglichen Jahren weitergeleitet zu werden.
@@ -179,5 +210,6 @@ app.post('/doRegister', function(req, res) {
       });
  });
 });
+
 /////////////////*FUNKTIONEN*///////////////////////////////
 /* neue js. datei anlegen*/
