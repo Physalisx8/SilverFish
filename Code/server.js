@@ -171,7 +171,7 @@ app.post('/doProjektwahl', function(req,res){
    if(Projekt==""){
        res.render('Projekterror');
    }
-        db.all(sql2, function(err, rows){
+        db2.all(sql2, function(err, rows){
             if(err){
                console.error(err);
             }   
