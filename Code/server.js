@@ -86,11 +86,11 @@ app.get('/profilanlegen', function(req,res){
 });
 
 app.get('/FaecherJahre', function(req,res){
-    if (typeof req.session.name !== 'undefined'){
+    if ('sessionVName' !== 'undefined'){
     res.render('FaecherJahre');
 }
 else {
-    res.send('du bist icht eingeloggt');
+    res.send('du bist nicht eingeloggt');
 }});
 
 //Open the Fileuploading html
@@ -128,6 +128,7 @@ app.post('/doLogin', function(req,res){
                     //Passwort und EIngabe im vergleich
                     if(password == dbpassword){
                         req.session["sessionVName"]= rows[0].name;
+                        req.session["sessionVPw"]= rows[0].password;
                         res.redirect('main');
                     }else{
                         const variable ='Passwort';
@@ -165,7 +166,7 @@ app.post('/doRegister', function(req, res) {
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
-    let hash = bcrypt.hashSync(password, row.passoword);
+    let hash = bcrypt.hashSync(password, row.password);
     //SQL Befehl um einen neuen Eintrag der Tabelle user hinzuzufügen
     let sql = `INSERT INTO user (name, email, password) VALUES ("${name}", "${email}", "${hash}");`
     db.run(sql, function(err) {
@@ -173,7 +174,7 @@ app.post('/doRegister', function(req, res) {
             console.error(err)
             app.post('/registrierungsfehler');
         }if(bcrypt.compareSync(password, row.password)){
-            res.render('hello',{username:row.name, email: row.email});
+            res.render('hello',{username: row.name, email: row.email});
         }
         else {
             res.send('Benutzer wurde angelegt');

@@ -34,9 +34,9 @@
 <% if(typeof name !== 'undefined' && name !== null){%>
     <a href="login">Login</a>
     <a href="signup">Sign Up</a>
-<%}<%else%>{%>
+<%}else{%>
     <a href="FaecherJahre">Fächer</a>
- <%} %>
+ <%} %>%>
 
 
 
@@ -57,8 +57,13 @@
             Wenn ihr eure eigenen Arbeiten zum Kopieren oder auch als Download freigeben wollt, könnt ihr<br>
             das natürlich tun und in der Projektbeschreibung angeben.
         </p>
-        <a href="login">Login</a>
-        <a href="signup">Registriere dich!</a>
+
+        <% if(typeof name !== 'undefined' && name !== null){%>
+            <a href="login">Login</a>
+            <a href="signup">Sign Up</a>
+        <%}%>
+
+        
 
 
     </div>
