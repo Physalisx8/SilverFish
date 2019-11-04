@@ -50,7 +50,7 @@ let db = new sqlite3.Database('login.db', function(err) {
 });
 
 ///Datenbank für Projekte angesetzt
-let db = new sqlite3.Database('datenbanken.db', function(err) {
+let db2 = new sqlite3.Database('datenbanken.db', function(err) {
     if (err) { 
         console.error(err); 
     } else {
