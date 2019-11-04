@@ -113,13 +113,13 @@ app.post('/doLogin', function(req,res){
    if(name=="" || password=="" ){
        res.render('loginnichtseingegeben');
    }
-        db.all(sql, function(err, row){
+        db.all(sql, function(err, rows){
             if(err){
                console.error(err);
             }   
             else{
                 //Name nicht in Datenbank vorhanden
-                if(rows.lenght==0){
+                if(rows.length==0){
                     const variable = "Name";
                     res.render('Loginfehlername', {variable});
                 }
