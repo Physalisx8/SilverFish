@@ -115,40 +115,35 @@ app.post('/doLogin', function(req,res){
    }
         db.all(sql, function(err, row){
             if(err){
-                app.post('doLoginerror');
+               console.error(err);
             }   
-            if( typeof sql==undefined){
-                app.post('doLoginerror');
-            }
-            if (name && password) {
-                connection.query('SELECT * FROM accounts WHERE name = ? AND password = ?', [name, password], function(err, results, fields) {
-                if(err){
-                     console.log("HEEEEEEY");
-                     res.render('doLoginerror');
-                };
-                if(rows.length == 0){
-                    res.render('Loginfehlername');
+            else{
+                //Name nicht in Datenbank vorhanden
+                if(rows.lenght==0){
+                    const variable = "Name";
+                    res.render('Loginfehlername', {variable});
                 }
-                
+                else{
+                    const dbpassword = rows[0].password;
+                    //Passwort und EIngabe im vergleich
+                    if(password == dbpassword){
+                        res.render('main');
+                    }else{
+                        const variable = "Passwort";
+                        res.render('loginfehlerpassword', {variable});
+                    }
+                }
+            }
+            
+            
+            
+            
+            
+        
 
 
                   
-                    
-            //Session Variablen sollen in die loginresponse.ejs übergeben werden
-                
-                });
-            }
-           
-                   
-            else{ 
-     res.render('main', {
-                        name: req.session.name,
-                        password: req.session.password,
-                         });
-                      }
-
-                
-                
+       
             
         });
     });
