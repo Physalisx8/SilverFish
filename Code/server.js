@@ -201,7 +201,7 @@ app.post('/', function(req,res){
     let sql = `SELECT * FROM Projekte WHERE fach="${fach}"`;
     db.get(sql, function(err, row){
         //Session Variablen sollen in die loginresponse.ejs übergeben wrden
-        res.render('FächerJahre', {
+        res.render('FaecherJahre', {
             fach: req.session.fach,
            
         });
