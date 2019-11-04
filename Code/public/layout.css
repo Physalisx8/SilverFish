@@ -32,7 +32,7 @@ html, body {
   .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-family: helvetica;
+    font-family: 'Hey August';
     font-size: 25px;
     color: #f1f1f1;
     display: block;
@@ -64,7 +64,7 @@ html, body {
   }
    @font-face { 
       font-family: "Hey August";
-      src: ("../public/Hey_August.ttf");
+      src: ("../public/HeyAugust.ttf");
   }
 
   .main h1{

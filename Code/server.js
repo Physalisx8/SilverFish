@@ -127,23 +127,14 @@ app.post('/doLogin', function(req,res){
                     const dbpassword = rows[0].password;
                     //Passwort und EIngabe im vergleich
                     if(password == dbpassword){
-                        res.render('main');
+                        req.session["sessionVName"]= rows[0].name;
+                        res.redirect('main');
                     }else{
-                        const variable = "Passwort";
+                        const variable ='Passwort';
                         res.render('loginfehlerpassword', {variable});
                     }
                 }
             }
-            
-            
-            
-            
-            
-        
-
-
-                  
-       
             
         });
     });
