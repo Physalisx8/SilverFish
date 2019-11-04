@@ -49,6 +49,18 @@ let db = new sqlite3.Database('login.db', function(err) {
     }
 });
 
+///Datenbank für Projekte angesetzt
+let db = new sqlite3.Database('datenbanken.db', function(err) {
+    if (err) { 
+        console.error(err); 
+    } else {
+        console.log("Verbindung zur Datenbank der Projkete wurde auch hergestellt.")
+    }
+});
+
+
+
+
 
 
 ///////////////////*AUSGABEN*///////////////////////
@@ -78,6 +90,11 @@ app.get('/aboutus', function(req, res){
 app.get('/MeinProfil', function(req,res){
     res.render('MeinProfil');
 });
+//Projektsuche ausgabe
+app.get('/projname', function(req,res){
+    res.render('projname');
+});
+  
 
 
 //Profil anlegen
@@ -86,11 +103,11 @@ app.get('/profilanlegen', function(req,res){
 });
 
 app.get('/FaecherJahre', function(req,res){
-    if ('sessionVName' !== 'undefined'){
+    if (typeof req.session.name !== 'undefined'){
     res.render('FaecherJahre');
 }
 else {
-    res.send('du bist nicht eingeloggt');
+    res.send('du bist icht eingeloggt');
 }});
 
 //Open the Fileuploading html
@@ -128,7 +145,6 @@ app.post('/doLogin', function(req,res){
                     //Passwort und EIngabe im vergleich
                     if(password == dbpassword){
                         req.session["sessionVName"]= rows[0].name;
-                        req.session["sessionVPw"]= rows[0].password;
                         res.redirect('main');
                     }else{
                         const variable ='Passwort';
@@ -144,7 +160,38 @@ app.post('/doLogin', function(req,res){
 
 
          
-  
+  //////* Ich versuche ein Projekt auszuwählen und das dann anzuzeigen
+app.post('/doProjektwahl', function(req,res){
+    const Projekt = req.body.projektname;
+    
+ 
+
+   let sql2 = `SELECT * FROM Projekte WHERE Name="${Projekt}"`; 
+   
+   if(Projekt==""){
+       res.render('Projekterror');
+   }
+        db.all(sql2, function(err, rows){
+            if(err){
+               console.error(err);
+            }   
+            else{
+                //Name nicht in Datenbank vorhanden
+                if(rows.length==0){
+                    const variable = "Projekt";
+                    res.render('Projekterror', {variable});
+                }
+                else{
+                res.render('Projektanzeigen',{Projekte:rows});
+                    
+                    }
+                    }
+                
+            
+            
+        });
+    });
+
 
 
 ////* Der Anfangsversuch davon, eine auswahl von fächern zu treffen und dann zu den möglichen Jahren weitergeleitet zu werden.
@@ -166,7 +213,7 @@ app.post('/doRegister', function(req, res) {
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
-    let hash = bcrypt.hashSync(password, row.password);
+    let hash = bcrypt.hashSync(password, row.passoword);
     //SQL Befehl um einen neuen Eintrag der Tabelle user hinzuzufügen
     let sql = `INSERT INTO user (name, email, password) VALUES ("${name}", "${email}", "${hash}");`
     db.run(sql, function(err) {
@@ -174,7 +221,7 @@ app.post('/doRegister', function(req, res) {
             console.error(err)
             app.post('/registrierungsfehler');
         }if(bcrypt.compareSync(password, row.password)){
-            res.render('hello',{username: row.name, email: row.email});
+            res.render('hello',{username:row.name, email: row.email});
         }
         else {
             res.send('Benutzer wurde angelegt');
