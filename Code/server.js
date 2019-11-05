@@ -170,18 +170,21 @@ app.post('/doProjektwahl', function(req,res){
    
    if(Projekt==""){
        res.render('Projekterror');
+       console.log("LEER");
    }
         db2.all(sql2, function(err, rows){
             if(err){
                console.error(err);
+               
             }   
             else{
                 //Name nicht in Datenbank vorhanden
-                if(rows.length==0){
+                if(rows.length==""){
                     const variable = "Projekt";
                     res.render('Projekterror', {variable});
-                }
-                else{
+                    console.log("VOLL");
+                } else{//name doch vorhanden
+               
                 res.render('Projektanzeigen',{Projekte:rows});
                     
                     }
@@ -213,18 +216,16 @@ app.post('/doRegister', function(req, res) {
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
-    let hash = bcrypt.hashSync(password, row.passoword);
+    
     //SQL Befehl um einen neuen Eintrag der Tabelle user hinzuzufügen
-    let sql = `INSERT INTO user (name, email, password) VALUES ("${name}", "${email}", "${hash}");`
+    let sql = `INSERT INTO user (name, email, password) VALUES ("${name}", "${email}", "${password}");`
     db.run(sql, function(err) {
         if (err) { 
             console.error(err)
             app.post('/registrierungsfehler');
-        }if(bcrypt.compareSync(password, row.password)){
-            res.render('hello',{username:row.name, email: row.email});
         }
         else {
-            res.send('Benutzer wurde angelegt');
+            res.render('benutzerangelegt');
         }
     });
    
