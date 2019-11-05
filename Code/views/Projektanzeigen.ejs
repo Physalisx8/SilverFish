@@ -26,21 +26,24 @@
 <a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a>
 </div>
 
-
-<!-- Side navigation -->
+<!-- Side navigation, wenn man eingeloggt ist, verschwindet man-->
 <div class="sidenav">
-<a href="main">Main</a>
-<a href="login">Login</a>
-<a href="signup">Sign Up</a>
-<a href="aboutus">About Us</a>
-</div>
+    <a href="main">Main</a>
+    <a href="aboutus">About Us</a>
+    <% if(typeof name !== 'undefined' && name !== null){%>
+        <a href="login">Login</a>
+        <a href="signup">Sign Up</a>
+    <%}else{%>
+        <a href="FaecherJahre">Fächer</a>
+     <%} %>%>
+    </div>
 
 <div class="main">
     <h1>Willkommen im Projekt:   <%=Projekte[0].Name%></h1><br>
     <p>Im Fach <%=Projekte[0].Fach%>
     erstellt <%=Projekte[0].Jahr%></p><br>
     <p><%=Projekte[0].Beschreibung%></p>
-    </form>
+    
 </body>
 </html>
 </div>

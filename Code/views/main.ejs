@@ -22,31 +22,32 @@
         
 <!-- top navigation bar-->
 <div class="navbar">
-<a href="#"><i class="fa fa-fw fa-search"></i></a>
-<a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a>
+        <% if(typeof name !== 'undefined' && name !== null){%>
+            <a href="login"><i class="fa fa-fw fa-user"></i></a>
+        <%}else{%>
+            <a href="#"><i class="fa fa-fw fa-search"></i></a>
+            <a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a>
+         <%} %>%>
+
 </div>
 
 
-<!-- Side navigation -->
+<!-- Side navigation, wenn man eingeloggt ist, verschwindet man-->
 <div class="sidenav">
-<a href="main">Main</a>
-<a href="aboutus">About Us</a>
-<% if(typeof name !== 'undefined' && name !== null){%>
-    <a href="login">Login</a>
-    <a href="signup">Sign Up</a>
-<%}else{%>
-    <a href="FaecherJahre">Fächer</a>
- <%} %>%>
-
-
-
-</div>
+        <a href="main">Main</a>
+        <% if(typeof name !== 'undefined' && typeof name !== null){%>
+            <a href="login">Login</a>
+            <a href="signup">Sign Up</a>
+        <%}else{%>
+            <a href="FaecherJahre">Fächer</a>
+         <%} %>%>
+         <a href="aboutus">About Us</a>
+        </div>
 
 <div class="main">
 
       
       <!-- main Text -->
-      
         <h1>Willkommen</h1>
         <p>Die Website ist für Studenten der HAW gedacht, die sich über Altprojekte und Gruppen<br>
             informieren oder sich untereinander vernetzen wollen.<br>
@@ -57,15 +58,11 @@
             Wenn ihr eure eigenen Arbeiten zum Kopieren oder auch als Download freigeben wollt, könnt ihr<br>
             das natürlich tun und in der Projektbeschreibung angeben.
         </p>
-
+        <!-- wenn man eingeloggt ist, erscheint der Kram hier nicht -->
         <% if(typeof name !== 'undefined' && name !== null){%>
             <a href="login">Login</a>
             <a href="signup">Sign Up</a>
         <%}%>
-
-        
-
-
     </div>
     </body>
 </html>
