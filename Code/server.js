@@ -200,7 +200,7 @@ app.post('/doProjektwahl', function(req,res){
         });
     });
 
-/////* Profiländerungen speichern und anzeigen
+/////* Profiländerungen speichern und dann auf MeinProfil
 
 app.post('/doProfilandern', function(req,res){
     const ProfilName = req.body.ProfilName;
@@ -211,7 +211,7 @@ app.post('/doProfilandern', function(req,res){
     const ProfilStudiengang= req.body.ProfilStudiengang;
  
 
-   let sql3 = `SELECT * FROM Profil WHERE ProfilName="${ProfilName}"`; 
+    let sql3 = `UPDATE Profil SET (ProfilName, ProfiilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang) VALUES ("${ProfilNeuerName}", "${ProfilMail}", "${ProfilProjekte}", "${ProfilZutun}",${Profil}) WHERE ProfilName==("${ProfilName}");`
    
    if(ProfilName=="" ){
        res.render('Loginfehlername');
@@ -220,17 +220,16 @@ app.post('/doProfilandern', function(req,res){
             if(err){
                console.error(err);
             }   
-            else{
+           
                 //Name nicht in Datenbank vorhanden
                 if(rows.length==0){
                     res.render('Loginfehlername', {variable});
                 }
                 else{
-                    let sql = `UPDATE Profil SET (ProfilName, ProfiilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang) VALUES ("${ProfilNeuerName}", "${ProfilMail}", "${ProfilProjekte}", "${ProfilZutun}",${ProfilStudiengang}) WHERE ProfilName==("${ProfilName}");`
                     res.render('MeinProfil',{Profil:rows});
                     }
                     
-                }
+                
             
             
         });
