@@ -36,18 +36,23 @@
 
 </div>
 <div class="main">
-         <form action= "/eingabe" method= "POST">
-                <p>Mein Name:</p>
-                <input type="text" name="name">
-                <p>Mein Passwort:</p>
-                <input type="password" name="password"><br><br>
+         <form action= '/doProfilandern' method= "POST">
+                <p>Mein alter Name:</p>
+                <input type="text" name="ProfilName">
+
+                <p>Mein neuer Name:</p>
+                <input type="text" name="ProfilNeuerName">
+
                 <p>Meine HAW-mail:</p>
-                <input type="email" name="email"><br><br>
+                <input type="email" name="ProfilMail"><br><br>
+
                 <p>Meine bisherigen Projekte:</p><br>
-                <input type="text" name="Meine Projekte"> <br><br>
+                <input type="text" name="ProfilProjekte"> <br><br>
+
                 <input type="radio" name="kontaktfreudig" value="nicht"> Ich hab momentan viel zutun<br>
                 <input type="radio" name="nichtkontaktfreudig" value="sehr"> Ihr könnt mich sehr gern anschreiben<br>
                 <div class="container">
+       </form>
                     <<p>So seh ich aus:</p>
                     <%= typeof msg != 'undefined' ? msg : '' %>
                     <form action="/upload" method="POST" enctype="multipart/form-data">
@@ -66,7 +71,7 @@
                   </div>
               
                 
-                <input type="submit" name="abschicken"><br>
+                <input type="submit" name="Speichern"><br>
        </form>
        </div>
         

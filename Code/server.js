@@ -71,6 +71,11 @@ app.get('/MeinProfil',function(req,res){
     res.render('MeinProfil');
 })
 
+app.get('/profilanlegen',function(req,res){
+    res.render('profilanlegen');
+})
+
+
 //Ausgabe des Registrieren Formulars
 app.get('/signup', function(req, res){
     res.render('signup');
@@ -162,7 +167,7 @@ app.post('/doLogin', function(req,res){
          
   //////* Ich versuche ein Projekt auszuwählen und das dann anzuzeigen
 app.post('/doProjektwahl', function(req,res){
-    const Projekt = req.body.projektname;
+    const Projekt = req.body.Projektname;
     
  
 
@@ -177,9 +182,9 @@ app.post('/doProjektwahl', function(req,res){
                console.error(err);
                
             }   
-            else{
+         
                 //Name nicht in Datenbank vorhanden
-                if(rows.length==""){
+                if(rows.length==0){
                     const variable = "Projekt";
                     res.render('Projekterror', {variable});
                     console.log("VOLL");
@@ -187,13 +192,54 @@ app.post('/doProjektwahl', function(req,res){
                
                 res.render('Projektanzeigen',{Projekte:rows});
                     
-                    }
+                    
                     }
                 
             
             
         });
     });
+
+/////* Profiländerungen speichern und anzeigen
+
+app.post('/doProfilandern', function(req,res){
+    const ProfilName = req.body.ProfilName;
+    const ProfilNeuerName= req.body.ProfilNeuerName;
+    const ProfilMail = req.body.ProfilMail;
+    const ProfilProjekte= req.body.ProfilProjekte;
+    const ProfilZutun= req.body.ProfilZutun;
+ 
+
+   let sql = `SELECT * FROM Profil WHERE ProfilName="${ProfilName}"`; 
+   
+   if(ProfilName=="" ){
+       res.render('Loginfehlername');
+   }
+        db.all(sql, function(err, rows){
+            if(err){
+               console.error(err);
+            }   
+            else{
+                //Name nicht in Datenbank vorhanden
+                if(rows.length==0){
+                    res.render('Loginfehlername', {variable});
+                }
+                else{
+                    let sql = `UPDATE Profil SET (ProfilName, ProfiilMail, ProfilProjekte,ProfilZutun) VALUES ("${ProfilNeuerName}", "${ProfilMail}", "${ProfilProjekte}", "${ProfilZutun}") WHERE ProfilName==("${ProfilName}");`
+                
+                    }
+                    
+                }
+            
+            
+        });
+    });
+            
+        
+
+
+
+
 
 
 
