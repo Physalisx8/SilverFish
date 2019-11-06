@@ -70,6 +70,11 @@ app.get('/main', function(req,res){
 app.get('/MeinProfil',function(req,res){
     res.render('MeinProfil');
 })
+//profiländerung ausgeben
+app.get('/profilandern',function(req,res){
+    res.render('profilandern');
+})
+
 
 //Ausgabe des Registrieren Formulars
 app.get('/signup', function(req, res){
@@ -162,7 +167,7 @@ app.post('/doLogin', function(req,res){
          
   //////* Ich versuche ein Projekt auszuwählen und das dann anzuzeigen
 app.post('/doProjektwahl', function(req,res){
-    const Projekt = req.body.projektname;
+    const Projekt = req.body.Projektname;
     
  
 
@@ -177,9 +182,9 @@ app.post('/doProjektwahl', function(req,res){
                console.error(err);
                
             }   
-            else{
+         
                 //Name nicht in Datenbank vorhanden
-                if(rows.length==""){
+                if(rows.length==0){
                     const variable = "Projekt";
                     res.render('Projekterror', {variable});
                     console.log("VOLL");
@@ -187,13 +192,57 @@ app.post('/doProjektwahl', function(req,res){
                
                 res.render('Projektanzeigen',{Projekte:rows});
                     
-                    }
+                    
                     }
                 
             
             
         });
     });
+
+/////* Profiländerungen speichern und dann auf MeinProfil
+
+app.post('/doProfilandern', function(req,res){
+    const ProfilName = req.body.ProfilName;
+    const ProfilNeuerName= req.body.ProfilNeuerName;
+    const ProfilMail = req.body.ProfilMail;
+    const ProfilProjekte= req.body.ProfilProjekte;
+    const ProfilZutun= req.body.ProfilZutun;
+    const ProfilStudiengang= req.body.ProfilStudiengang;
+ 
+
+    let sql3 = `UPDATE Profil SET (ProfilName, ProfiilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang) VALUES ("${ProfilNeuerName}", "${ProfilMail}", "${ProfilProjekte}", "${ProfilZutun}",${Profil}) WHERE ProfilName==("${ProfilName}");`
+   
+   if(ProfilName=="" ){
+      
+       let sql = `INSERT INTO Profil (ProfilName, , ProfiilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang) VALUES ("${ProfilNeuerName}", "${ProfilMail}", "${ProfilProjekte}", "${ProfilZutun}",${Profil}) WHERE ProfilName==("${ProfilName}");`
+       res.render('MeinProfil',{Profil:rows});
+   }
+        db2.all(sql3, function(err, rows){
+            if(err){
+               console.error(err);
+            }   
+           
+                //Name nicht in Datenbank vorhanden
+                if(rows.length==0){
+                    console.log("Noch nicht drin")
+                    res.render('loginfehlername');
+                }
+                else{
+                    res.render('MeinProfil',{Profil:rows});
+                    }
+                    
+                
+            
+            
+        });
+    });
+            
+        
+
+
+
+
 
 
 
