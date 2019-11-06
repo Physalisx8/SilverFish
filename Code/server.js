@@ -214,7 +214,9 @@ app.post('/doProfilandern', function(req,res){
     let sql3 = `UPDATE Profil SET (ProfilName, ProfiilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang) VALUES ("${ProfilNeuerName}", "${ProfilMail}", "${ProfilProjekte}", "${ProfilZutun}",${Profil}) WHERE ProfilName==("${ProfilName}");`
    
    if(ProfilName=="" ){
-       res.render('Loginfehlername');
+      
+       let sql = `INSERT INTO Profil (ProfilName, , ProfiilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang) VALUES ("${ProfilNeuerName}", "${ProfilMail}", "${ProfilProjekte}", "${ProfilZutun}",${Profil}) WHERE ProfilName==("${ProfilName}");`
+       res.render('MeinProfil',{Profil:rows});
    }
         db2.all(sql3, function(err, rows){
             if(err){
@@ -224,7 +226,7 @@ app.post('/doProfilandern', function(req,res){
                 //Name nicht in Datenbank vorhanden
                 if(rows.length==0){
                     console.log("Noch nicht drin")
-                    let sql = `INSERT INTO Profil (ProfilName, , ProfiilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang) VALUES ("${ProfilNeuerName}", "${ProfilMail}", "${ProfilProjekte}", "${ProfilZutun}",${Profil}) WHERE ProfilName==("${ProfilName}");`
+                    res.render('loginfehlername');
                 }
                 else{
                     res.render('MeinProfil',{Profil:rows});
