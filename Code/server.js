@@ -108,18 +108,40 @@ app.get('/profilanlegen', function(req,res){
 });
 
 app.get('/FaecherJahre', function(req,res){
-    if (typeof req.session.name !== 'undefined'){
-    res.render('FaecherJahre');
-}
+    //if (typeof req.session.name !== 'undefined'){
+        let sql = 'select * from Projekte'; 
+        db2.all(sql,function(err,rows){
+            let Projekte = Array();    
+            for (let i=0;i<rows.length;i++) {
+                let Fach = rows[i].Fach;
+                let Jahr = rows[i].Jahr;
+                if (!((Object.keys(Projekte)).includes(Fach))){
+                    Projekte[Fach] = {};
+                }
+                if(!((Object.keys(Projekte[Fach])).includes(Jahr))){
+                    Projekte[Fach][Jahr] = Array();
+                }
+                Projekte[Fach][Jahr].push(rows[i]);
+            }
+            res.render('FaecherJahre',{Projekte:Projekte});
+        })
+        
+        
+/* }
 else {
     res.send('du bist icht eingeloggt');
-}});
+} */
+});
 
 //Open the Fileuploading html
 app.get('/Files', function(req,res){
     res.sendfile(__dirname + "/Files.html");
   });
   
+//Alle die Projektjahren anzeigen
+app.get('/Jahren', function(req,res){
+    res.render('Jahtren');
+});
  
 
 
