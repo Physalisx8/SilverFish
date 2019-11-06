@@ -223,7 +223,8 @@ app.post('/doProfilandern', function(req,res){
            
                 //Name nicht in Datenbank vorhanden
                 if(rows.length==0){
-                    res.render('Loginfehlername', {variable});
+                    console.log("Noch nicht drin")
+                    let sql = `INSERT INTO Profil (ProfilName, , ProfiilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang) VALUES ("${ProfilNeuerName}", "${ProfilMail}", "${ProfilProjekte}", "${ProfilZutun}",${Profil}) WHERE ProfilName==("${ProfilName}");`
                 }
                 else{
                     res.render('MeinProfil',{Profil:rows});
