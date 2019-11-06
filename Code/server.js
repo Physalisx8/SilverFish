@@ -70,9 +70,9 @@ app.get('/main', function(req,res){
 app.get('/MeinProfil',function(req,res){
     res.render('MeinProfil');
 })
-
-app.get('/profilanlegen',function(req,res){
-    res.render('profilanlegen');
+//profiländerung ausgeben
+app.get('/profilandern',function(req,res){
+    res.render('profilandern');
 })
 
 
@@ -208,14 +208,15 @@ app.post('/doProfilandern', function(req,res){
     const ProfilMail = req.body.ProfilMail;
     const ProfilProjekte= req.body.ProfilProjekte;
     const ProfilZutun= req.body.ProfilZutun;
+    const ProfilStudiengang= req.body.ProfilStudiengang;
  
 
-   let sql = `SELECT * FROM Profil WHERE ProfilName="${ProfilName}"`; 
+   let sql3 = `SELECT * FROM Profil WHERE ProfilName="${ProfilName}"`; 
    
    if(ProfilName=="" ){
        res.render('Loginfehlername');
    }
-        db.all(sql, function(err, rows){
+        db2.all(sql3, function(err, rows){
             if(err){
                console.error(err);
             }   
@@ -225,8 +226,8 @@ app.post('/doProfilandern', function(req,res){
                     res.render('Loginfehlername', {variable});
                 }
                 else{
-                    let sql = `UPDATE Profil SET (ProfilName, ProfiilMail, ProfilProjekte,ProfilZutun) VALUES ("${ProfilNeuerName}", "${ProfilMail}", "${ProfilProjekte}", "${ProfilZutun}") WHERE ProfilName==("${ProfilName}");`
-                
+                    let sql = `UPDATE Profil SET (ProfilName, ProfiilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang) VALUES ("${ProfilNeuerName}", "${ProfilMail}", "${ProfilProjekte}", "${ProfilZutun}",${ProfilStudiengang}) WHERE ProfilName==("${ProfilName}");`
+                    res.render('MeinProfil',{Profil:rows});
                     }
                     
                 }

@@ -37,11 +37,11 @@
 
 
 <div class="main">
-        <h1>Mein Profil</h1>
-        <form action="/doRegister" method="POST">
-            <p>Theoretisch ist das hier dein Profil<br>
-            Aber wir sind noch nicht so weit mit der datenbank<br>
-            also leg los jesus:)</p>
+        <h2>Das bin ich: <%=Profil[0].ProfilName%></h2><br>
+        <p>HAW- Mail: <%=Profil[0].ProfilMail%></p><br><br><br>
+        <p>Mein Studiengang: <%=Profil[0].ProfilStudiengang%></p>
+        <p>Meine Projekte: <br><%=Profil[0].ProfilProjekte%></p><br><br><br><br></p>
+      
 
             <a href="profilanlegen">Profil bearbeiten</a>
         </form>
