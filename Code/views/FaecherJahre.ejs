@@ -44,7 +44,17 @@
         
         Angewandte Programmierung <br>
 
-        
+        <% for (Fach in Projekte){ %>
+                <p><%= Fach %></p>
+                <% for (Jahr in Projekte[Fach]) {%>
+                        <p><%= Jahr %></p>
+                        <% for (project of Projekte[Fach][Jahr]) { %>
+                                <p>test</p>
+                                <%= project.Beschreibung %>
+                        <% } %>
+                <%  }    %>
+      <%  } %>
+         
         </form>
     </body>
 </html>
