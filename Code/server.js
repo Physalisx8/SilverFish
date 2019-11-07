@@ -54,26 +54,31 @@ let db2 = new sqlite3.Database('datenbanken.db', function(err) {
     if (err) { 
         console.error(err); 
     } else {
-        console.log("Verbindung zur Datenbank der Projkete wurde auch hergestellt.")
+        console.log("Verbindung zur Datenbank der Projekte wurde auch hergestellt.")
     }
 });
 
 
 
-
-
-
 ///////////////////*AUSGABEN*///////////////////////
+
+/*Neues Feature: Diebstahlschutz. Du kummst hier net rein! Wenn man die URL kennt, wird man trotzdem nur auf die Main geleitet. (:
+  i: sessionVName speichert den Benutzernamen solange er eingeloggt ist. Bei Serverneustart wird's resettet. */
+
 app.get('/main', function(req,res){
-    res.render('main');
-});
-app.get('/MeinProfil',function(req,res){
-    res.render('MeinProfil');
-})
-//profiländerung ausgeben
-app.get('/profilandern',function(req,res){
-    res.render('profilandern');
-})
+    if (typeof req.session["sessionVName"] != 'undefined'){
+        res.render('logmain');
+    }else{
+        res.render('main');
+}});
+
+//logmain, die man sieht, wenn man eingeloggt ist. :)
+app.get('/logmain', function(req,res){
+    if (typeof req.session["sessionVName"] != 'undefined'){
+        res.render('logmain')
+    }else{
+        res.render('main')
+}});
 
 
 //Ausgabe des Registrieren Formulars
@@ -86,27 +91,42 @@ app.get('/login', function(req,res){
     res.render('login');
 });
 
-//Ausgabe aboutus
+//Ausgabe Über uns
 app.get('/aboutus', function(req, res){
     res.render('aboutus');
 });
 
-//Ausgabe Profil
-app.get('/MeinProfil', function(req,res){
-    res.render('MeinProfil');
-});
-//Projektsuche ausgabe
+//Ausgabe Projektsuche + Diebstahlschutz
 app.get('/projname', function(req,res){
-    res.render('projname');
-});
-  
+    if (typeof req.session["sessionVName"] != 'undefined'){
+        res.render('projname')
+    }else{
+        res.render('main')
+}});
 
+  ///////////PROFIL AUSGABE///////////
+//mein Profil - Diebstahlschutz
+app.get('/MeinProfil',function(req,res){
+    if (typeof req.session["sessionVName"] != 'undefined'){
+        res.render('MeinProfil')
+    }else{
+        res.render('main')
+}});
 
-//Profil anlegen
+//Profil anlegen - Diebstahlschutz
 app.get('/profilanlegen', function(req,res){
-    res.render('profilanlegen');
-});
+    if (typeof req.session["sessionVName"] != 'undefined'){
+        res.render('profilanlegen')
+    } else{
+        res.render('main')
+}});
+ 
+//profiländerung ausgeben
+app.get('/profilandern',function(req,res){
+    res.render('profilandern');
+})
 
+//FächerJahre Übersicht - Diebstahlschutz
 app.get('/FaecherJahre', function(req,res){
     //if (typeof req.session.name !== 'undefined'){
         let sql = 'select * from Projekte'; 
@@ -147,44 +167,44 @@ app.get('/Jahren', function(req,res){
 
 ///////////////////*AUSWERTUNGEN*/////////////////////////
 //Post Auswertung des logins
-app.post('/doLogin', function(req,res){
-    const name = req.body.name;
-    const password = req.body.password;
- 
 
-   let sql = `SELECT * FROM user WHERE name="${name}"`; 
-   
-   if(name=="" || password=="" ){
-       res.render('loginnichtseingegeben');
-   }
-        db.all(sql, function(err, rows){
-            if(err){
-               console.error(err);
-            }   
-            else{
-                //Name nicht in Datenbank vorhanden
-                if(rows.length==0){
-                    const variable = "Name";
-                    res.render('Loginfehlername', {variable});
-                }
-                else{
-                    const dbpassword = rows[0].password;
-                    //Passwort und EIngabe im vergleich
-                    if(password == dbpassword){
-                        req.session["sessionVName"]= rows[0].name;
-                        res.redirect('main');
-                    }else{
-                        const variable ='Passwort';
-                        res.render('loginfehlerpassword', {variable});
-                    }
-                }
-            }
-            
-        });
-    });
-            
-        
+app.post('/logmain', function(req,res){
+    //das in ["name"] geändert, da das dann mit dem req.body funktioniert und man sich (leider nur einmalig) den Namen ausgeben lassen kann.
+    const name= req.body["name"];
+    const password = req.body["password"];
 
+    let sql = `SELECT * FROM user WHERE name="${name}"`; 
+
+    if(name=="" || password=="" ){
+        res.render('loginnichtseingegeben');
+    }
+         db.all(sql, function(err, rows){
+             if(err){
+                console.error(err);
+             }   
+             else{
+                 //Name nicht in Datenbank vorhanden
+                 if(rows.length==0){
+                     const variable = "Name";
+                     res.render('Loginfehlername', {variable});
+                 }
+                 else{
+                     const dbpassword = rows[0].password;
+                     //Passwort und EIngabe im vergleich
+                     if(password == dbpassword){
+                         req.session["sessionVName"]= rows[0].name;
+                         //für den Fall, dass man sich wundert -> req.body bzw req.session macht's möglich, dass dein Benutzername ausgegeben wird!... 
+                         //leider nur einmal xD... -> FIX needed!
+                         res.render('logmain', req.session);
+                     }else{
+                         const variable ='Passwort';
+                         res.render('loginfehlerpassword', {variable});
+                     }
+                 }
+             }
+             
+         });
+     });
 
          
   //////* Ich versuche ein Projekt auszuwählen und das dann anzuzeigen
@@ -213,14 +233,9 @@ app.post('/doProjektwahl', function(req,res){
                 } else{//name doch vorhanden
                
                 res.render('Projektanzeigen',{Projekte:rows});
-                    
-                    
-                    }
-                
-            
-            
-        });
-    });
+ }});
+});
+
 
 /////* Profiländerungen speichern und dann auf MeinProfil
 
