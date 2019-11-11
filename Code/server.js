@@ -107,6 +107,10 @@ app.get('/AP', function(req, res){
         })
 });
 
+app.get('/MGD', function(req, res){
+    res.render('MGD');
+});
+
 //Ausgabe des Logins
 app.get('/login', function(req,res){
     res.render('login');
@@ -173,6 +177,28 @@ else {
     res.send('du bist icht eingeloggt');
 } */
 });
+
+app.get('/AP', function(req,res){
+  
+        let sql = 'select * from Projekte'; 
+        db2.all(sql,function(err,rows){
+            let Projekte = Array();    
+            for (let i=0;i<rows.length;i++) {
+                let Fach = rows[i].Fach;
+                let Jahr = rows[i].Jahr;
+                if (!((Object.keys(Projekte)).includes(Fach))){
+                    Projekte[Fach] = {};
+                }
+                if(!((Object.keys(Projekte[Fach])).includes(Jahr))){
+                    Projekte[Fach][Jahr] = Array();
+                }
+                Projekte[Fach][Jahr].push(rows[i]);
+            }
+            res.render('AP',{Projekte:Projekte});
+        })
+    });
+        
+       
 
 //Open the Fileuploading html
 app.get('/Files', function(req,res){
@@ -272,8 +298,6 @@ app.post('/doProfilandern', function(req,res){
     let sql3 = `UPDATE Profil SET (ProfilName, ProfiilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang) VALUES ("${ProfilNeuerName}", "${ProfilMail}", "${ProfilProjekte}", "${ProfilZutun}",${Profil}) WHERE ProfilName==("${ProfilName}");`
    
    if(ProfilName=="" ){
-      
-       let sql = `INSERT INTO Profil (ProfilName, , ProfiilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang) VALUES ("${ProfilNeuerName}", "${ProfilMail}", "${ProfilProjekte}", "${ProfilZutun}",${Profil}) WHERE ProfilName==("${ProfilName}");`
        res.render('MeinProfil',{Profil:rows});
    }
         db2.all(sql3, function(err, rows){
@@ -325,8 +349,21 @@ app.post('/doRegister', function(req, res) {
     const password = req.body.password;
     
     //SQL Befehl um einen neuen Eintrag der Tabelle user hinzuzufügen
-    let sql = `INSERT INTO user (name, email, password) VALUES ("${name}", "${email}", "${password}");`
-    db.run(sql, function(err) {
+    
+
+    let sql5= `INSERT INTO Profil (ProfilName,ProfilNeuerName, ProfilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang, ProfilUser) VALUES ("${name}", "", "", "", "","", "${name}");`
+   
+db2.run(sql5, function(err) {
+    if (err) { 
+        console.error(err)
+        app.post('/registrierungsfehler');
+    }
+    else {
+        res.render('benutzerangelegt');
+    }
+});
+let sql = `INSERT INTO user (name, email, password) VALUES ("${name}", "${email}", "${password}");`
+db.run(sql, function(err) {
         if (err) { 
             console.error(err)
             app.post('/registrierungsfehler');
@@ -335,8 +372,8 @@ app.post('/doRegister', function(req, res) {
             res.render('benutzerangelegt');
         }
     });
-   
-});
+});    
+
 
  //Auswertung von der Fileupload in server
  app.post('/fileupload', function (req, res) {
