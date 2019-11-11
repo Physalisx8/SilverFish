@@ -86,6 +86,12 @@ app.get('/signup', function(req, res){
     res.render('signup');
 });
 
+//Ausgabe der AP Projekte
+
+app.get('/AP', function(req, res){
+    res.render('AP');
+});
+
 //Ausgabe des Logins
 app.get('/login', function(req,res){
     res.render('login');
