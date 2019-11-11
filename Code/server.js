@@ -111,6 +111,10 @@ app.get('/MGD', function(req, res){
     res.render('MGD');
 });
 
+app.get('/MGD', function(req, res){
+    res.render('MGD');
+});
+
 //Ausgabe des Logins
 app.get('/login', function(req,res){
     res.render('login');
