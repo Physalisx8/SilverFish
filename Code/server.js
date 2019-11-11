@@ -107,7 +107,7 @@ app.get('/projname', function(req,res){
     if (typeof req.session["sessionVName"] != 'undefined'){
         res.render('projname')
     }else{
-        res.render('main')
+        res.render('nichteingeloggt')
 }});
 
   ///////////PROFIL AUSGABE///////////
@@ -116,7 +116,7 @@ app.get('/MeinProfil',function(req,res){
     if (typeof req.session["sessionVName"] != 'undefined'){
         res.render('MeinProfil')
     }else{
-        res.render('main')
+        res.render('nichteingeloggt')
 }});
 
 //Profil anlegen - Diebstahlschutz
@@ -124,7 +124,7 @@ app.get('/profilanlegen', function(req,res){
     if (typeof req.session["sessionVName"] != 'undefined'){
         res.render('profilanlegen')
     } else{
-        res.render('main')
+        res.render('nichteingeloggt')
 }});
  
 //profiländerung ausgeben
