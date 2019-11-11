@@ -89,7 +89,22 @@ app.get('/signup', function(req, res){
 //Ausgabe der AP Projekte
 
 app.get('/AP', function(req, res){
-    res.render('AP');
+    let sql = 'select * from Projekte'; 
+        db2.all(sql,function(err,rows)
+        {
+            let Projekte = Array();    
+            for (let i=0;i<rows.length;i++) {
+                let Name = rows[i].Name;
+                if (!((Object.keys(Projekte)).includes(Name))){
+                    Projekte[Name] = Array();
+                }
+               /* if(!((Object.keys(Projekte[Fach])).includes(Jahr))){
+                    Projekte[Fach][Jahr] = Array();
+                }*/
+                Projekte.push(rows[i]);
+            }
+            res.render('AP',{Projekte:Projekte});
+        })
 });
 
 //Ausgabe des Logins
