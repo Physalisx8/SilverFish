@@ -111,10 +111,6 @@ app.get('/MGD', function(req, res){
     res.render('MGD');
 });
 
-app.get('/MGD', function(req, res){
-    res.render('MGD');
-});
-
 //Ausgabe des Logins
 app.get('/login', function(req,res){
     res.render('login');
@@ -146,7 +142,7 @@ app.get('/projname', function(req,res){
 //mein Profil - Diebstahlschutz
 app.get('/MeinProfil',function(req,res){
     if (typeof req.session["sessionVName"] != 'undefined'){
-        res.render('profilanlegen')
+        res.render('profilanlegen', {Profil:rows});
     }else{
         res.render('nichteingeloggt')
 }});
