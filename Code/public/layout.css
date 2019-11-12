@@ -43,7 +43,7 @@ html, body {
   .sidenav a:hover {
     color: #c2b9b9;
   }
-  
+
 
   /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
   @media screen and (max-height: 450px) {
@@ -77,8 +77,8 @@ html, body {
     font-size: 25px;
     padding-left: 15px;
     color: rgba(193,184,184,0.8);
-
   }
+  
   
   .main a:hover{
     color: white;
@@ -144,8 +144,7 @@ html, body {
     cursor: pointer;
 }
 .textEditor header > button:hover{
-    color: white;
-    
+    color: white;  
 }
 
 .headerbody{
@@ -161,4 +160,25 @@ input[type ="color"]{
     border: none; 
     outline: none;
     background-color: transparent;
+}
+
+button {
+  margin-top: 60px;
+  padding: 10px 20px;
+  background-color:rgb(123, 122, 122);
+  box-shadow: 0px 17px 10 px -7px rgba(199, 189, 189, 0.4);
+  border: solid 3px rgb(123, 122, 122);
+  border-radius: 5px;
+  font-size: 30px;
+  font-family: 'Hey August';
+  transition: ease-in-out;
+  transition: ease-in-out all 300ms;
+}
+
+button:hover{
+  color: black;
+  background-color: #FFF;
+  transform: translate(0px, -10px);
+  box-shadow: 0px 30px 10px -10px rgba(206, 199, 199, 0.2);
+
 }

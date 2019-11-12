@@ -66,8 +66,8 @@ let db2 = new sqlite3.Database('datenbanken.db', function(err) {
   i: sessionVName speichert den Benutzernamen solange er eingeloggt ist. Bei Serverneustart wird's resettet. */
 
 app.get('/main', function(req,res){
-    if (typeof req.session["sessionVName"] != 'undefined'){
-        res.render('logmain');
+   if (typeof req.session["sessionVName"] != 'undefined'){
+        res.render('logmain',{name : req.session["sessionVName"]});
     }else{
         res.render('main');
 }});
@@ -75,9 +75,9 @@ app.get('/main', function(req,res){
 //logmain, die man sieht, wenn man eingeloggt ist. :)
 app.get('/logmain', function(req,res){
     if (typeof req.session["sessionVName"] != 'undefined'){
-        res.render('logmain')
+        res.render('logmain',{name : req.session["sessionVName"]});
     }else{
-        res.render('main')
+        res.render('main');
 }});
 
 
@@ -89,7 +89,26 @@ app.get('/signup', function(req, res){
 //Ausgabe der AP Projekte
 
 app.get('/AP', function(req, res){
-    res.render('AP');
+    let sql = 'select * from Projekte'; 
+        db2.all(sql,function(err,rows)
+        {
+            let Projekte = Array();    
+            for (let i=0;i<rows.length;i++) {
+                let Name = rows[i].Name;
+                if (!((Object.keys(Projekte)).includes(Name))){
+                    Projekte[Name] = Array();
+                }
+               /* if(!((Object.keys(Projekte[Fach])).includes(Jahr))){
+                    Projekte[Fach][Jahr] = Array();
+                }*/
+                Projekte.push(rows[i]);
+            }
+            res.render('AP',{Projekte:Projekte});
+        })
+});
+
+app.get('/MGD', function(req, res){
+    res.render('MGD');
 });
 
 app.get('/MGD', function(req, res){
@@ -100,6 +119,15 @@ app.get('/MGD', function(req, res){
 app.get('/login', function(req,res){
     res.render('login');
 });
+
+//LOGOUT
+app.get('/logout', function(req,res){
+    req.session.destroy(function(err){
+});
+//leider übergibt er die Msg. nicht. Aber wayne.
+    res.render('main', {msgLogin: "Successfully logged out."});
+});
+
 
 //Ausgabe Über uns
 app.get('/aboutus', function(req, res){
@@ -227,7 +255,7 @@ app.post('/logmain', function(req,res){
                          req.session["sessionVName"]= rows[0].name;
                          //für den Fall, dass man sich wundert -> req.body bzw req.session macht's möglich, dass dein Benutzername ausgegeben wird!... 
                          //leider nur einmal xD... -> FIX needed!
-                         res.render('logmain', req.session);
+                         res.render('logmain', {name: req.session["sessionVName"]});
                      }else{
                          const variable ='Passwort';
                          res.render('loginfehlerpassword', {variable});
@@ -311,11 +339,6 @@ app.post('/doProfilandern', function(req,res){
         });
     });
             
-        
-
-
-
-
 
 
 
