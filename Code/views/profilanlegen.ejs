@@ -37,8 +37,8 @@
 
 
 <div class="main">
-        <h1>Mein Profil ändern, anzeigen oder anlegen</h1>
-        <h4>Wenn du dein Profil nur anzeigen willst, gib nur deinen Namen ein</h4>
+        <h1>Mein Profil ändern</h1>
+   
         <form action="/doProfilandern" method="POST">
             <p>Mein alter Name:</p>
                 <input type="text" name="ProfilName">
@@ -46,17 +46,11 @@
                 <p>Mein neuer Name:</p>
                 <input type="text" name="ProfilNeuerName">
 
-                <p>Meine HAW-mail:</p>
-                <input type="email" name="ProfilMail"><br><br>
+                <p>Meine e-mail:</p>
+                <input type="email" name="ProfilMail">
 
-                <p>Mein Studiengang:</p>
-                <input type="text" name="ProfilStudiengang"><br><br>
-
-                <p>Meine bisherigen Projekte:</p><br>
-                <input type="text" name="ProfilProjekte"> <br><br>
-
-                <input type="radio" name="kontaktfreudig" value="nicht"> Ich hab momentan viel zutun<br>
-                <input type="radio" name="nichtkontaktfreudig" value="sehr"> Ihr könnt mich sehr gern anschreiben<br>
+                <p>Mein neues Passwort:</p>
+                <input type="password" name="ProfilNeuesPasswort">
                 <div class="container">
             <input type="submit" value="Speichern">
         </form>

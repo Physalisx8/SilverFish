@@ -151,6 +151,13 @@ app.get('/MeinProfil',function(req,res){
         res.render('nichteingeloggt')
 }});
 
+app.get('/MeinProfilanzeigen',function(req,res){
+    if (typeof req.session["sessionVName"] != 'undefined'){
+        res.render('MeinProfil')
+    }else{
+        res.render('nichteingeloggt')
+}});
+
 //Profil anlegen - Diebstahlschutz
 app.get('/profilanlegen', function(req,res){
     if (typeof req.session["sessionVName"] != 'undefined'){
@@ -302,45 +309,26 @@ app.post('/doProjektwahl', function(req,res){
 app.post('/doProfilandern', function(req,res){
     const ProfilName = req.body.ProfilName;
     const ProfilNeuerName= req.body.ProfilNeuerName;
-    const ProfilMail = req.body.ProfilMail;
-    const ProfilProjekte= req.body.ProfilProjekte;
-    const ProfilZutun= req.body.ProfilZutun;
-    const ProfilStudiengang= req.body.ProfilStudiengang;
+    const ProfilMail=req.body.ProfilMail;
+    const ProfilPasswort=req.body.ProfilNeuesPasswort;
  
 
-    let sql3 = `UPDATE Profil
-    SET ProfilName= "${ProfilNeuerName}", ProfilMail= "${ProfilMail}",
-    ProfilProjekte=  "${ProfilProjekte}",ProfilZutun="${ProfilZutun}" ,
-    ProfilStudiengang= "${ProfilStudiengang}"
-    WHERE ProfilName=="${ProfilName}";`
+    let sql3 = `UPDATE user SET name= "${ProfilNeuerName}", email="${ProfilMail}", password="${ProfilPasswort}" WHERE name = "${ProfilName}"`;
    
    if(ProfilName=="" ){
        res.render('MeinProfil',{Profil:rows});
    }
-        db2.get(sql3, function(err, row){
+        db.get(sql3, function(err, row){
             if(err){
                console.error(err);
             }   
-           
-                //Name nicht in Datenbank vorhanden
-               // if(rows.length==0){
-                    //console.log("Noch nicht drin")
-                 //   res.render('loginfehlername');
-                //}
-                else{
-                    sql3 = `SELECT * FROM Profil WHERE ProfilName= "${ProfilName}"`
-                    db2.all(sql3, function(err,rows){
-                    console.log(rows);
-                    res.render('MeinProfil',{Profil:rows});
-                    }); 
-              };   
+           else{
+               res.render('logmain', {name : req.session["sessionVName"]});
+           }
             
             
         });
     });
-            
-
-
 
 ////* Der Anfangsversuch davon, eine auswahl von fächern zu treffen und dann zu den möglichen Jahren weitergeleitet zu werden.
 app.post('/', function(req,res){
@@ -365,7 +353,7 @@ app.post('/doRegister', function(req, res) {
     //SQL Befehl um einen neuen Eintrag der Tabelle user hinzuzufügen
     
 
-    let sql5= `INSERT INTO Profil (ProfilName,ProfilNeuerName, ProfilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang, ProfilUser) VALUES ("${name}", "", "", "", "","", "${name}");`
+    //let sql5= `INSERT INTO Profil (ProfilName,ProfilNeuerName, ProfilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang, ProfilUser) VALUES ("${name}", "", "", "", "","", "${name}");`
    
 db2.run(sql5, function(err) {
     if (err) { 
