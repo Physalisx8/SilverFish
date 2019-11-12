@@ -16,7 +16,7 @@
 <!--Header -->
 <div class= "header">
         <div class="img">
-                <img src="BannerMain.png" alt="BannerMain">
+                <img src="APBanner.png" alt="BannerMain">
 </div>
         
 <!-- top navigation bar-->
@@ -36,11 +36,19 @@
 
 <div class="main">
 
- <% for (Fach in Projekte){ %>
-    <% if (Fach == "Ap"){%>}
-                 <%= Projekte.Name %> 
-                    <% } %>
-                    <%  } %>
+
+        <% for (Fach in Projekte){ %>
+                <% if (Fach == "Ap"){%>}
+                 <p><%= Fach %></p>
+                        <% for (Jahr in Projekte[Fach]) {%>
+                                <p><%= Jahr %></p>
+                                <% for (project of Projekte[Fach][Jahr]) { %>
+                                        <p>test</p>
+                                 <%= project.Beschreibung %>
+                                <% } %>
+                                <%  } %>
+                <%  }    %>
+            <%  } %>
   
 </form>
 </body>
