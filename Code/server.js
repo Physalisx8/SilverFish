@@ -146,7 +146,7 @@ app.get('/projname', function(req,res){
 //mein Profil - Diebstahlschutz
 app.get('/MeinProfil',function(req,res){
     if (typeof req.session["sessionVName"] != 'undefined'){
-        res.render('MeinProfil')
+        res.render('profilanlegen')
     }else{
         res.render('nichteingeloggt')
 }});
@@ -308,26 +308,32 @@ app.post('/doProfilandern', function(req,res){
     const ProfilStudiengang= req.body.ProfilStudiengang;
  
 
-    let sql3 = `UPDATE Profil SET (ProfilName, ProfiilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang) VALUES ("${ProfilNeuerName}", "${ProfilMail}", "${ProfilProjekte}", "${ProfilZutun}",${Profil}) WHERE ProfilName==("${ProfilName}");`
+    let sql3 = `UPDATE Profil
+    SET ProfilName= "${ProfilNeuerName}", ProfilMail= "${ProfilMail}",
+    ProfilProjekte=  "${ProfilProjekte}",ProfilZutun="${ProfilZutun}" ,
+    ProfilStudiengang= "${ProfilStudiengang}"
+    WHERE ProfilName=="${ProfilName}";`
    
    if(ProfilName=="" ){
        res.render('MeinProfil',{Profil:rows});
    }
-        db2.all(sql3, function(err, rows){
+        db2.get(sql3, function(err, row){
             if(err){
                console.error(err);
             }   
            
                 //Name nicht in Datenbank vorhanden
-                if(rows.length==0){
-                    console.log("Noch nicht drin")
-                    res.render('loginfehlername');
-                }
+               // if(rows.length==0){
+                    //console.log("Noch nicht drin")
+                 //   res.render('loginfehlername');
+                //}
                 else{
+                    sql3 = `SELECT * FROM Profil WHERE ProfilName= "${ProfilName}"`
+                    db2.all(sql3, function(err,rows){
+                    console.log(rows);
                     res.render('MeinProfil',{Profil:rows});
-                    }
-                    
-                
+                    }); 
+              };   
             
             
         });
