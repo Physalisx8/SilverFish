@@ -116,6 +116,11 @@ app.get('/login', function(req,res){
     res.render('login');
 });
 
+//Anlegen eines Projektes
+app.get('/Projektanlegen', function(req,res){
+    res.render('Projektanlegen');
+});
+
 //LOGOUT
 app.get('/logout', function(req,res){
     req.session.destroy(function(err){
@@ -339,6 +344,49 @@ app.post('/', function(req,res){
         });
     });
 });
+
+
+//Speicherung eines neuen Projektes 
+app.post('/doProjektanlegen', function(req,res){
+    const ProjektName = req.body.ProjektName;
+    const ProjektBeschreibung= req.body.ProjektBeschreibung;
+    const ProjektFach=req.body.ProjektFach;
+    const ProjektJahr=req.body.ProjektJahr;
+  
+  
+    let sql15 = `SELECT * FROM Projekte WHERE Name="${ProjektName}";` //Prüft, ob name de Projektes schon verhanden ist
+    db2.all(sql15,function(err, rows){
+       if(rows.length!=0){
+            res.render('projektanlegenerror');
+            console.log(rows.length);
+        }else{ 
+
+//wenn noch nicht vorhanden erstellt er es ab hier
+    let sql10 = `INSERT INTO Projekte (Name, Fach, Beschreibung, Jahr) VALUES ("${ProjektName}", "${ProjektFach}", "${ProjektBeschreibung}", "${ProjektJahr}");`
+   
+  if(ProjektFach!="AP" && ProjektFach!="MGD" || ProjektName =="" ){ //Prüft ob wichtige Angaben vorhanden und gültig
+       res.render('projektanlegenerror'); }   
+       else{
+        db2.get(sql10, function(err, row){
+            if(err){
+               console.error(err);
+            } 
+  
+           else{
+               res.render('Projektangelegt', {name : ProjektName});
+           }
+            
+            
+        });
+ 
+}
+        }
+    });
+
+   });
+
+
+
 
 //Auswertung nach der Registrierung
 app.post('/doRegister', function(req, res) {

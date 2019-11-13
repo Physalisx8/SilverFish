@@ -23,7 +23,6 @@
 <div class="navbar">
 <a href="projname"><i class="fa fa-fw fa-search"></i></a>
 <a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a>
-<a href="/logout"><i class="fa fa-sign-out"></i></a>
 </div>
 
 
@@ -33,29 +32,31 @@
 <a href="FaecherJahre">Fächer</a>
 <a href="aboutus">About Us</a>
 <a href="Projektanlegen">Neues Projekt</a>
-
 </div>
 
 
 
 <div class="main">
-        <h1>Mein Profil ändern</h1>
-   
-        <form action="/doProfilandern" method="POST">
-            <p>Mein alter Name:</p>
-                <input type="text" name="ProfilName">
+    <h1>Mein neues Projekt</h1><br>
+    <form action="/doProjektanlegen" method="POST">
 
-                <p>Mein neuer Name:</p>
-                <input type="text" name="ProfilNeuerName">
+        <h4>Name des Projektes:</h4>
+        <input type="text" name="ProjektName"><br><br><br>
 
-                <p>Meine e-mail:</p>
-                <input type="email" name="ProfilMail">
+        <h4>Im Fach :</h4>
+        <p>Bitte gibt hier für angewandte Programmierung "AP" und für Media-Game Design "MGD" an :)</p>
+        <input type="text" name="ProjektFach"> <br><br><br>
 
-                <p>Mein neues Passwort:</p>
-                <input type="password" name="ProfilNeuesPasswort">
-                <div class="container">
-            <input type="submit" value="Speichern">
-        </form>
-    </body>
+        <h4>Im Jahr :</h4>
+        <input type="text" name="ProjektJahr"> <br><br><br>
+
+        <h4>Beschreibung :</h4>
+        <p>Hier kannst du auch die Namen der Mitwirkenden Studenten angeben, falls die das möchten.<br>
+        So haben die anderen Studenten die Möglichkeit sich über die HAW-Mail mit euch zu vernetzen.</p>
+        <input type="text" name="ProjektBeschreibung"><br><br><br>
+
+        <input type="submit" value="Projekt anlegen">
+    </form>
+</body>
 </html>
 </div>
