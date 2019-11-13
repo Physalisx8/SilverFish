@@ -353,20 +353,20 @@ app.post('/doRegister', function(req, res) {
    
 
 
-let sql5 = `SELECT * FROM user WHERE name=="${name};`
+let sql5 = `SELECT * FROM user WHERE name="${name}";`
 db.all(sql5,function(err, rows){
     if(rows.length!=0){
-        app.post('/registrierungsfehler');
+        res.render('registrierungsfehler');
         console.log(rows.length);
     }else{
         let sql = `INSERT INTO user (name, email, password) VALUES ("${name}", "${email}", "${password}");`
         db.run(sql, function(err) {
-        if (err) { 
-            console.error(err)
-            app.post('/registrierungsfehler');
+            if (err) { 
+                console.error(err)
+                res.render('registrierungsfehler');
         }
-        else {
-            res.render('benutzerangelegt');
+            else {
+                res.render('benutzerangelegt', { name: name});
         }
     });
 
