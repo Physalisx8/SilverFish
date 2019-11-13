@@ -142,7 +142,7 @@ app.get('/projname', function(req,res){
 //mein Profil - Diebstahlschutz
 app.get('/MeinProfil',function(req,res){
     if (typeof req.session["sessionVName"] != 'undefined'){
-        res.render('profilanlegen', {Profil:rows});
+        res.render('profilanlegen');
     }else{
         res.render('nichteingeloggt')
 }});
@@ -345,20 +345,17 @@ app.post('/doRegister', function(req, res) {
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
-    
-    //SQL Befehl um einen neuen Eintrag der Tabelle user hinzuzufügen
-    
-
-    //let sql5= `INSERT INTO Profil (ProfilName,ProfilNeuerName, ProfilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang, ProfilUser) VALUES ("${name}", "", "", "", "","", "${name}");`
-   
 
 
-let sql5 = `SELECT * FROM user WHERE name="${name}";`
+let sql5 = `SELECT * FROM user WHERE name="${name}";` //Prüft, ob name schon verhanden ist
 db.all(sql5,function(err, rows){
-    if(rows.length!=0){
+    if(password==""|| name ==""){
+        res.render('loginnichtseingegeben');
+        
+    }else if(rows.length!=0){
         res.render('registrierungsfehler');
         console.log(rows.length);
-    }else{
+    }else{                                          //wenn nicht, legt er den eintrag an
         let sql = `INSERT INTO user (name, email, password) VALUES ("${name}", "${email}", "${password}");`
         db.run(sql, function(err) {
             if (err) { 
