@@ -247,7 +247,7 @@ app.post('/logmain', function(req,res){
              }   
              else{
                  //Name nicht in Datenbank vorhanden
-                 if(rows.length==0){
+                 if( rows.length==0){
                      const variable = "Name";
                      res.render('Loginfehlername', {variable});
                  }
@@ -351,17 +351,16 @@ app.post('/doRegister', function(req, res) {
 
     //let sql5= `INSERT INTO Profil (ProfilName,ProfilNeuerName, ProfilMail, ProfilProjekte,ProfilZutun, ProfilStudiengang, ProfilUser) VALUES ("${name}", "", "", "", "","", "${name}");`
    
-db2.run(sql5, function(err) {
-    if (err) { 
-        console.error(err)
+
+
+let sql5 = `SELECT * FROM user WHERE name=="${name};`
+db.all(sql5,function(err, rows){
+    if(rows.length!=0){
         app.post('/registrierungsfehler');
-    }
-    else {
-        res.render('benutzerangelegt');
-    }
-});
-let sql = `INSERT INTO user (name, email, password) VALUES ("${name}", "${email}", "${password}");`
-db.run(sql, function(err) {
+        console.log(rows.length);
+    }else{
+        let sql = `INSERT INTO user (name, email, password) VALUES ("${name}", "${email}", "${password}");`
+        db.run(sql, function(err) {
         if (err) { 
             console.error(err)
             app.post('/registrierungsfehler');
@@ -370,7 +369,23 @@ db.run(sql, function(err) {
             res.render('benutzerangelegt');
         }
     });
-});    
+
+    }
+})
+
+
+
+
+  
+
+
+    
+
+});
+
+
+
+
 
 
  //Auswertung von der Fileupload in server
