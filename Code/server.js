@@ -134,6 +134,11 @@ app.get('/login', function(req,res){
     res.render('login');
 });
 
+//Ausgabe eines Projektes
+app.get('/Projektanzeigen', function(req,res){
+    res.render('Projektanzeigen');
+});
+
 //Anlegen eines Projektes
 app.get('/Projektanlegen', function(req,res){
     res.render('Projektanlegen');
@@ -217,27 +222,7 @@ else {
 } */
 });
 
-// DIese Ap ist poopoo mona was machst du??
-/*app.get('/AP', function(req,res){
-  
-        let sql = 'select * from Projekte'; 
-        db2.all(sql,function(err,rows){
-            let Projekte = Array();    
-            for (let i=0;i<rows.length;i++) {
-                let Fach = rows[i].Fach;
-                let Jahr = rows[i].Jahr;
-                if (!((Object.keys(Projekte)).includes(Fach))){
-                    Projekte[Fach] = {};
-                }
-                if(!((Object.keys(Projekte[Fach])).includes(Jahr))){
-                    Projekte[Fach][Jahr] = Array();
-                }
-                Projekte[Fach][Jahr].push(rows[i]);
-            }
-            res.render('AP',{Projekte:Projekte});
-        })
-    });
-        */
+
        
 
 //Open the Fileuploading html
@@ -331,24 +316,55 @@ app.post('/doProfilandern', function(req,res){
     const ProfilNeuerName= req.body.ProfilNeuerName;
     const ProfilMail=req.body.ProfilMail;
     const ProfilPasswort=req.body.ProfilNeuesPasswort;
- 
+    const ProfilAltesPasswort=req.body.ProfilAltesPasswort;
 
-    let sql3 = `UPDATE user SET name= "${ProfilNeuerName}", email="${ProfilMail}", password="${ProfilPasswort}" WHERE name = "${ProfilName}"`;
+
+
+    let sql8 = `SELECT * FROM user WHERE name="${ProfilName}"`; 
+
+         db.all(sql8, function(err, rows){
+             if(err){
+                console.error(err);
+             }   
+             else{
+                 //Name nicht in Datenbank vorhanden
+                 if( rows.length==0){
+                     const variable = "Name";
+                     res.render('andernerror', {variable});
+                 }
+                 else{
+                     const dbpassword = rows[0].password;
+                     if(ProfilAltesPasswort == dbpassword){
+                      let sql3 = `UPDATE user SET name= "${ProfilNeuerName}", email="${ProfilMail}", password="${ProfilPasswort}" WHERE name = "${ProfilName}"`;
    
-   if(ProfilName=="" ){
-       res.render('MeinProfil',{Profil:rows});
-   }
-        db.get(sql3, function(err, row){
-            if(err){
-               console.error(err);
+                            if(ProfilName=="" ){
+                                 res.render('andernerror',{Profil:rows});
+                                }
+                             db.get(sql3, function(err, row){
+                                 if(err){
+                                 console.error(err);
             }   
-           else{
-               res.render('logmain', {name : req.session["sessionVName"]});
+                                else{
+                                 res.render('login', {name : req.session["sessionVName"]});
            }
             
             
         });
+                        
+                    }else{
+                        const variable ='Passwort';
+                        res.render('loginfehlerpassword', {variable});
+                    }
+                }
+            }
+            
+        });
     });
+
+
+
+
+  
 
 ////* Der Anfangsversuch davon, eine auswahl von fächern zu treffen und dann zu den möglichen Jahren weitergeleitet zu werden.
 app.post('/', function(req,res){
