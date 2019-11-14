@@ -39,18 +39,12 @@
 
 
         <% for (Fach in Projekte){ %>
-                <% if (Fach == "Ap"){%>}
-                 <p><%= Fach %></p>
-                        <% for (Jahr in Projekte[Fach]) {%>
-                                <p><%= Jahr %></p>
-                                <% for (project of Projekte[Fach][Jahr]) { %>
-                                        <p>test</p>
-                                 <%= project.Beschreibung %>
-                                <% } %>
-                                <%  } %>
-                <%  }    %>
-            <%  } %>
-  
+                <%if (Fach == "Ap"){ %>
+                        <% for (Name in Projekte[Fach]){ %>
+                        <a href="Projektanzeigen.ejs"> <h5> <%=Name %></h5></a>
+                      <%  } %>
+                <% } %>
+        <%    } %>
 </form>
 </body>
 </html>

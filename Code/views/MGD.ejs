@@ -36,7 +36,13 @@
 
 
 <div class="main">
-
+        <% for (Fach in Projekte){ %>
+                <%if (Fach == "MGD"){ %>
+                        <% for (Name in Projekte[Fach]){ %>
+                                <a href="Projektanzeigen.ejs"> <h5> <%=Name %></h5></a>
+                        <%  } %>
+                <% } %>
+        <%    } %>
 
 
 </form>

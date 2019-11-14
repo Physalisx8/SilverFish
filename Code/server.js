@@ -94,22 +94,40 @@ app.get('/AP', function(req, res){
         {
             let Projekte = Array();    
             for (let i=0;i<rows.length;i++) {
+                let Fach= rows[i].Fach;
                 let Name = rows[i].Name;
-                if (!((Object.keys(Projekte)).includes(Name))){
-                    Projekte[Name] = Array();
+                if (!((Object.keys(Projekte)).includes(Fach))){
+                    Projekte[Fach] = {};
                 }
-               /* if(!((Object.keys(Projekte[Fach])).includes(Jahr))){
-                    Projekte[Fach][Jahr] = Array();
-                }*/
-                Projekte.push(rows[i]);
+               if (!((Object.keys(Projekte[Fach])).includes(Name))){
+                Projekte[Fach][Name] = Array();
+            }
+                Projekte[Fach][Name].push(rows[i]);
             }
             res.render('AP',{Projekte:Projekte});
         })
 });
 
 app.get('/MGD', function(req, res){
-    res.render('MGD');
-});
+    let sql = 'select * from Projekte'; 
+        db2.all(sql,function(err,rows){
+            let Projekte = Array();    
+            for (let i=0;i<rows.length;i++) {
+                let Fach = rows[i].Fach;
+                let Name = rows[i].Name;
+                if (!((Object.keys(Projekte)).includes(Fach))){
+                    Projekte[Fach] = {};
+                }
+                if(!((Object.keys(Projekte[Fach])).includes(Name))){
+                    Projekte[Fach][Name] = Array();
+                }
+                Projekte[Fach][Name].push(rows[i]);
+            }
+            res.render('MGD',{Projekte:Projekte});
+        })
+    });
+        
+    
 
 //Ausgabe des Logins
 app.get('/login', function(req,res){
@@ -199,7 +217,8 @@ else {
 } */
 });
 
-app.get('/AP', function(req,res){
+// DIese Ap ist poopoo mona was machst du??
+/*app.get('/AP', function(req,res){
   
         let sql = 'select * from Projekte'; 
         db2.all(sql,function(err,rows){
@@ -218,7 +237,7 @@ app.get('/AP', function(req,res){
             res.render('AP',{Projekte:Projekte});
         })
     });
-        
+        */
        
 
 //Open the Fileuploading html
