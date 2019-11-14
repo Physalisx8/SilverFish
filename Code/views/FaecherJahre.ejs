@@ -37,21 +37,10 @@
 
 <div class="main">
         <h1>Fächer</h1>
-        <a href="AP">Angewandte Programmierung</a>
+        <a href="AP">Angewandte Programmierung</a><br><br>
         
         <a href="MGD">Media-Game Design</a>
-        <% for (Fach in Projekte){ %>
-                <% if (Fach == "Ap"){%>}
-                 <p><%= Fach %></p>
-                        <% for (Jahr in Projekte[Fach]) {%>
-                                <p><%= Jahr %></p>
-                                <% for (project of Projekte[Fach][Jahr]) { %>
-                                        <p>test</p>
-                                 <%= project.Beschreibung %>
-                                <% } %>
-                                <%  } %>
-                <%  }    %>
-            <%  } %>
+  
 
         </form>
     </body>
