@@ -15,7 +15,7 @@
  
 <!--Header -->
 <div class= "header">
-        <div class="img">
+        <div class="img2">
                 <img src="MGDBanner.png" alt="BannerMain">
 </div>
         
@@ -30,18 +30,19 @@
 <div class="sidenav">
         <a href="main">Main</a>
         <a href="FaecherJahre">Fächer</a>
-        <a href="aboutus">About Us</a>
         <a href="Projektanlegen">Neues Projekt</a>
+        <a href="aboutus">About Us</a>
         </div>
 
 
 <div class="main">
-        <% for (Fach in Projekte){ %>
+        <h1>Media-Game-Design Projekt Übersicht</h1>
+     <p><% for (Fach in Projekte){ %>
                 <%if (Fach == "MGD"){ %>
-                        <% for (Name in Projekte[Fach]){ %>
-                                <a href="Projektanzeigen.ejs"> <h3> <%=Name %></h3></a>
-                        <%  } %>   <% } %>  <%    } %>
-             
+                <% for (Name in Projekte[Fach]){ %>
+                        <a href="Projektanzeigen.ejs"> <%=Name %><br></a>
+                <%  } %>   <% } %>  <%    } %>
+         </p>
       
 
 

@@ -80,58 +80,22 @@ app.get('/logmain', function(req,res){
         res.render('main');
 }});
 
-
 //Ausgabe des Registrieren Formulars
 app.get('/signup', function(req, res){
-    res.render('signup');
+    //definiert die msg für die Fehlermeldung..
+    res.render('signup',{msg:""});
 });
-
-//Ausgabe der AP Projekte
-
-app.get('/AP', function(req, res){
-    let sql = 'select * from Projekte'; 
-        db2.all(sql,function(err,rows)
-        {
-            let Projekte = Array();    
-            for (let i=0;i<rows.length;i++) {
-                let Fach= rows[i].Fach;
-                let Name = rows[i].Name;
-                if (!((Object.keys(Projekte)).includes(Fach))){
-                    Projekte[Fach] = {};
-                }
-               if (!((Object.keys(Projekte[Fach])).includes(Name))){
-                Projekte[Fach][Name] = Array();
-            }
-                Projekte[Fach][Name].push(rows[i]);
-            }
-            res.render('AP',{Projekte:Projekte});
-        })
-});
-
-app.get('/MGD', function(req, res){
-    let sql = 'select * from Projekte'; 
-        db2.all(sql,function(err,rows){
-            let Projekte = Array();    
-            for (let i=0;i<rows.length;i++) {
-                let Fach = rows[i].Fach;
-                let Name = rows[i].Name;
-                if (!((Object.keys(Projekte)).includes(Fach))){
-                    Projekte[Fach] = {};
-                }
-                if(!((Object.keys(Projekte[Fach])).includes(Name))){
-                    Projekte[Fach][Name] = Array();
-                }
-                Projekte[Fach][Name].push(rows[i]);
-            }
-            res.render('MGD',{Projekte:Projekte});
-        })
-    });
-        
-    
 
 //Ausgabe des Logins
 app.get('/login', function(req,res){
     res.render('login');
+});
+
+//LOGOUT
+app.get('/logout', function(req,res){
+    req.session.destroy(function(err){
+});//leider übergibt er die Msg. nicht. Aber wayne.
+    res.render('main', {msgLogin: "Successfully logged out."});
 });
 
 //Ausgabe eines Projektes
@@ -143,15 +107,6 @@ app.get('/Projektanzeigen', function(req,res){
 app.get('/Projektanlegen', function(req,res){
     res.render('Projektanlegen');
 });
-
-//LOGOUT
-app.get('/logout', function(req,res){
-    req.session.destroy(function(err){
-});
-//leider übergibt er die Msg. nicht. Aber wayne.
-    res.render('main', {msgLogin: "Successfully logged out."});
-});
-
 
 //Ausgabe Über uns
 app.get('/aboutus', function(req, res){
@@ -213,17 +168,53 @@ app.get('/FaecherJahre', function(req,res){
                 Projekte[Fach][Jahr].push(rows[i]);
             }
             res.render('FaecherJahre',{Projekte:Projekte});
-        })
-        
-        
+        })      
 /* }
 else {
     res.send('du bist icht eingeloggt');
 } */
 });
 
+//Ausgabe der AP Projekte
+app.get('/AP', function(req, res){
+    let sql = 'select * from Projekte'; 
+        db2.all(sql,function(err,rows)
+        {
+            let Projekte = Array();    
+            for (let i=0;i<rows.length;i++) {
+                let Fach= rows[i].Fach;
+                let Name = rows[i].Name;
+                if (!((Object.keys(Projekte)).includes(Fach))){
+                    Projekte[Fach] = {};
+                } 
+                if (!((Object.keys(Projekte[Fach])).includes(Name))){
+                Projekte[Fach][Name] = Array();
+            }
+                Projekte[Fach][Name].push(rows[i]);
+            }
+            res.render('AP',{Projekte:Projekte});
+        })
+});
 
-       
+app.get('/MGD', function(req, res){
+    let sql = 'select * from Projekte'; 
+        db2.all(sql,function(err,rows){
+            let Projekte = Array();    
+            for (let i=0;i<rows.length;i++) {
+                let Fach = rows[i].Fach;
+                let Name = rows[i].Name;
+                if (!((Object.keys(Projekte)).includes(Fach))){
+                    Projekte[Fach] = {};
+                }
+                if(!((Object.keys(Projekte[Fach])).includes(Name))){
+                    Projekte[Fach][Name] = Array();
+                }
+                Projekte[Fach][Name].push(rows[i]);
+            }
+            res.render('MGD',{Projekte:Projekte});
+        })
+    });
+        
 
 //Open the Fileuploading html
 app.get('/Files', function(req,res){
@@ -241,7 +232,6 @@ app.get('/Jahren', function(req,res){
 //Post Auswertung des logins
 
 app.post('/logmain', function(req,res){
-    //das in ["name"] geändert, da das dann mit dem req.body funktioniert und man sich (leider nur einmalig) den Namen ausgeben lassen kann.
     const name= req.body["name"];
     const password = req.body["password"];
 
@@ -253,14 +243,12 @@ app.post('/logmain', function(req,res){
          db.all(sql, function(err, rows){
              if(err){
                 console.error(err);
-             }   
-             else{
+             }else{
                  //Name nicht in Datenbank vorhanden
                  if( rows.length==0){
                      const variable = "Name";
                      res.render('Loginfehlername', {variable});
-                 }
-                 else{
+                 }else{
                      const dbpassword = rows[0].password;
                      //Passwort und EIngabe im vergleich
                      if(password == dbpassword){
@@ -273,8 +261,7 @@ app.post('/logmain', function(req,res){
                          res.render('loginfehlerpassword', {variable});
                      }
                  }
-             }
-             
+             } 
          });
      });
 
@@ -283,7 +270,6 @@ app.post('/logmain', function(req,res){
 app.post('/doProjektwahl', function(req,res){
     const Projekt = req.body.Projektname;
     
- 
 
    let sql2 = `SELECT * FROM Projekte WHERE Name="${Projekt}"`; 
    
@@ -294,16 +280,12 @@ app.post('/doProjektwahl', function(req,res){
         db2.all(sql2, function(err, rows){
             if(err){
                console.error(err);
-               
-            }   
-         
-                //Name nicht in Datenbank vorhanden
-                if(rows.length==0){
-                    const variable = "Projekt";
-                    res.render('Projekterror', {variable});
-                    console.log("VOLL");
-                } else{//name doch vorhanden
-               
+            }//Name nicht in Datenbank vorhanden
+            if(rows.length==0){
+                const variable = "Projekt";
+                res.render('Projekterror', {variable});
+                console.log("VOLL");
+            } else{//name doch vorhanden
                 res.render('Projektanzeigen',{Projekte:rows});
  }});
 });
@@ -325,14 +307,12 @@ app.post('/doProfilandern', function(req,res){
          db.all(sql8, function(err, rows){
              if(err){
                 console.error(err);
-             }   
-             else{
+             }else{
                  //Name nicht in Datenbank vorhanden
                  if( rows.length==0){
                      const variable = "Name";
                      res.render('andernerror', {variable});
-                 }
-                 else{
+                 }else{
                      const dbpassword = rows[0].password;
                      if(ProfilAltesPasswort == dbpassword){
                       let sql3 = `UPDATE user SET name= "${ProfilNeuerName}", email="${ProfilMail}", password="${ProfilPasswort}" WHERE name = "${ProfilName}"`;
@@ -343,21 +323,16 @@ app.post('/doProfilandern', function(req,res){
                              db.get(sql3, function(err, row){
                                  if(err){
                                  console.error(err);
-            }   
-                                else{
+                                }else{
                                  res.render('login', {name : req.session["sessionVName"]});
-           }
-            
-            
-        });
-                        
-                    }else{
+                                }
+                            });
+                        }else{
                         const variable ='Passwort';
                         res.render('loginfehlerpassword', {variable});
                     }
                 }
             }
-            
         });
     });
 
@@ -375,7 +350,6 @@ app.post('/', function(req,res){
         //Session Variablen sollen in die loginresponse.ejs übergeben wrden
         res.render('FaecherJahre', {
             fach: req.session.fach,
-           
         });
     });
 });
@@ -400,25 +374,17 @@ app.post('/doProjektanlegen', function(req,res){
     let sql10 = `INSERT INTO Projekte (Name, Fach, Beschreibung, Jahr) VALUES ("${ProjektName}", "${ProjektFach}", "${ProjektBeschreibung}", "${ProjektJahr}");`
    
   if(ProjektFach!="AP" && ProjektFach!="MGD" || ProjektName =="" ){ //Prüft ob wichtige Angaben vorhanden und gültig
-       res.render('projektanlegenerror'); }   
-       else{
+       res.render('projektanlegenerror'); 
+    }else{
         db2.get(sql10, function(err, row){
             if(err){
                console.error(err);
-            } 
-  
-           else{
+            }else{
                res.render('Projektangelegt', {name : ProjektName});
-           }
-            
-            
-        });
- 
-}
-        }
+           }});
+        }}
     });
-
-   });
+});
 
 
 
@@ -428,6 +394,8 @@ app.post('/doRegister', function(req, res) {
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
+    const password2= req.body.pw2;
+    const msg="Passwörter stimmen nicht überein";
 
 
 let sql5 = `SELECT * FROM user WHERE name="${name}";` //Prüft, ob name schon verhanden ist
@@ -438,29 +406,19 @@ db.all(sql5,function(err, rows){
     }else if(rows.length!=0){
         res.render('registrierungsfehler');
         console.log(rows.length);
-    }else{                                          //wenn nicht, legt er den eintrag an
+    //checkt das erste Passwort mit dem zweiten gegen und gibt ne Fehlermeldung aus.
+    }else if(password != password2){
+        res.render("signup", {msg: msg});        
+        } else{                                          //wenn nicht, legt er den eintrag an
         let sql = `INSERT INTO user (name, email, password) VALUES ("${name}", "${email}", "${password}");`
         db.run(sql, function(err) {
             if (err) { 
                 console.error(err)
                 res.render('registrierungsfehler');
-        }
-            else {
+            } else {
                 res.render('benutzerangelegt', { name: name});
-        }
-    });
-
-    }
-})
-
-
-
-
-  
-
-
-    
-
+        }});
+    }})
 });
 
 

@@ -21,7 +21,8 @@
         
 <!-- top navigation bar-->
 <div class="navbar">
-<a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a>
+<a href="login"><i class="fa fa-fw fa-user"></i></a>
+
 </div>
 
 
@@ -32,19 +33,23 @@
 <a href="signup">Sign Up</a>
 </div>
 
-
+<p></p>
 
 <div class="main">
         <h1>Sign Up</h1>
-        <form action="/doRegister" method="POST">
-            <p>Name:</p>
-            <input type="text" name="name"><br>
+        <form action="/doRegister" method="POST" name="signup" onsubmit="return validateForm()">
+            <p><label for="name">Name:</label><br>
+            <input type="text" name="name" id="name"></p>
 
-            <p>E-Mail:</p>
-            <input type="email" name="email"> <br>
+            <p><label for="email">E-Mail:</label><br>
+            <input type="email" id="email" name="email"> </p>
 
-            <p>Passwort</p>
-            <input type="password" name="password"><br>
+            <p><label for="pass">Password (mind. 6 Zeichen):</label><br>
+            <input type="password" id="pass" name="password" minlength="6" required>
+            <p><%=msg%></p>
+
+            <label for="pass2">Password (mind. 6 Zeichen):</label><br>
+            <input type="password" id="pass2" minlength="6" name="pw2" required><br>
             <button type="submit" value="doRegister" name="doRegister">abschicken</button>
         </form>
     </body>

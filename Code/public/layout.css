@@ -1,26 +1,31 @@
 
 html, body {
-    background-color:black;
+    background-color: black;
     height: 100%;
+    max-width: 1000px;
+    margin: auto;
 }
 .header {
     top: 0;
   }
   
   .header img {
-    width: 100%;
-
-    height:200px;
-
+    
+    width:100%;
+    height:100%;
   }
+@font-face { 
+    font-family: 'heyAugust';
+    src: url(heyAugust.ttf);
+}
   
 
 .sidenav {
   height: 100%;
-  width: auto;
+  width: 110px;
   position: relative;
-  z-index: 1;
-  top: 0;
+  /*z-index: 1;
+  top: 0;*/
   background-color: rgb(123, 122, 122);
   float: left;
   margin-top: 0;
@@ -32,7 +37,7 @@ html, body {
   .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-family: 'Hey August';
+    font-family: 'heyAugust';
     font-size: 25px;
     color: #f1f1f1;
     display: block;
@@ -62,24 +67,20 @@ html, body {
       margin-top: 0px;
 
   }
-   @font-face { 
-      font-family: "Hey August";
-      src: ("../public/HeyAugust.ttf");
-  }
+  
 
   .main h1{
-      font-family: 'Hey August';
-     
+      font-family: 'heyAugust';     
   }
 
   .main a{
-    font-family: 'Hey August';
+    font-family: 'heyAugust';
     font-size: 25px;
     padding-left: 15px;
     color: rgba(193,184,184,0.8);
   }
-  
-  
+
+ 
   .main a:hover{
     color: white;
   }
@@ -170,7 +171,7 @@ button {
   border: solid 3px rgb(123, 122, 122);
   border-radius: 5px;
   font-size: 30px;
-  font-family: 'Hey August';
+  font-family: 'heyAugust';
   transition: ease-in-out;
   transition: ease-in-out all 300ms;
 }
@@ -182,3 +183,5 @@ button:hover{
   box-shadow: 0px 30px 10px -10px rgba(206, 199, 199, 0.2);
 
 }
+
+/*Gedöns*/

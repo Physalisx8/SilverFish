@@ -23,7 +23,7 @@
         
 <!-- top navigation bar-->
 <div class="navbar">
-<a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a>
+<a href="login"><i class="fa fa-fw fa-user"></i></a>
 </div>
 
 
@@ -38,8 +38,12 @@
 <div class="main">
         <h1>Login</h1>
         <form method="POST" action="/logmain" name="login">
-           Username: <input type="text" name="name"><br>
-           Password: <input type="password" name="password"><br>
+
+            <p><label for="user">Username:</label><br>
+            <input type="text" name="name" id="user"></p>
+
+            <p><label for="pwl">Password (mind. 6 Zeichen):</label><br>
+            <input type="password" id="pwl" name="password" minlength="6" required><br>
             <button type="submit" value="login" name="login">login</button>
         </form>
     </body>
