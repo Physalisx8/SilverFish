@@ -36,30 +36,29 @@
 
 
 </div>
-
-
-
+<!--label setzt die Eingabefelder schicker mit dem beschreibenden Text zusammen. Die id weist die Labels ihre Zugehörigkeit zu.-->
 <div class="main">
         <h1>Mein Profil ändern</h1>
    
         <form action="/doProfilandern" method="POST">
-            <p>Mein alter Name:</p>
-                <input type="text" name="ProfilName">
+            <p><label for="oN">Mein alter Name:</label></p>
+                <input type="text" id ="oN" name="ProfilName">
 
-            <p>Mein altes Passwort:</p>
-                <input type="password" name="ProfilAltesPasswort">
+                <p><label for="nM">Neuer Name</label></p>
+                <input type="text" id="nN" name="ProfilNeuerName">
 
-                <p>Mein neuer Name:</p>
-                <input type="text" name="ProfilNeuerName">
+                <p><label for="emailn">Neue E-Mail</label><br>
+                <input type="email" name="ProfilMail" id="emailn">
+                
+            <p><label for="opw">Mein altes Passwort:</label><br>     
+                <input type="password" id="opw" name="ProfilAltesPasswort" required>
 
-                <p>Meine e-mail:</p>
-                <input type="email" name="ProfilMail">
+                <p><label for="pass3">Mein neues Passwort (mind. 6 Zeichen):</label><br>
+                <input type="password" id="pass3" name="ProfilNeuesPasswort" minlength="6" required>
 
-                <p>Mein neues Passwort:</p>
-                <p>(Mindestens 6 Zeichen lang)</p>
-                <input type="password" name="ProfilNeuesPasswort">
                 <div class="container">
-            <input type="submit" value="Speichern">
+                <button type="submit" value="Speichern" name="Speichern">Speichern</button>
+            
         </form>
     </body>
 </html>

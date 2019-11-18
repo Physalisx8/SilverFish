@@ -254,7 +254,6 @@ app.post('/logmain', function(req,res){
                      if(password == dbpassword){
                          req.session["sessionVName"]= rows[0].name;
                          //für den Fall, dass man sich wundert -> req.body bzw req.session macht's möglich, dass dein Benutzername ausgegeben wird!... 
-                         //leider nur einmal xD... -> FIX needed!
                          res.render('logmain', {name: req.session["sessionVName"]});
                      }else{
                          const variable ='Passwort';
