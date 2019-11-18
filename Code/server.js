@@ -423,8 +423,6 @@ db.all(sql5,function(err, rows){
 
 
 
-
-
  //Auswertung von der Fileupload in server
  app.post('/fileupload', function (req, res) {
   

@@ -1,39 +1,43 @@
 
+/*CSS SHEET OMG*/
+/*für die wichtigsten Sachen*/
 html, body {
     background-color: black;
     height: 100%;
     max-width: 1000px;
     margin: auto;
 }
+
+/*Header Banner CSS*/
 .header {
     top: 0;
   }
-  
-  .header img {
-    
+.header img {
     width:100%;
     height:100%;
   }
+
+
+/*Schrift einstellen und für alle zugänglich machen*/
 @font-face { 
     font-family: 'heyAugust';
     src: url(heyAugust.ttf);
 }
   
+/*//////////////////////NAVIGATIONBARS///////////////////////////////*/
 
+/*Seitennavigation mit festgelegter Breite, höhe und der Position, Farbe, Anordnung der Schrift usw.*/
 .sidenav {
   height: 100%;
   width: 110px;
   position: relative;
-  /*z-index: 1;
-  top: 0;*/
   background-color: rgb(123, 122, 122);
   float: left;
   margin-top: 0;
   padding-bottom: 100%;
-    
   }
   
-  /* The navigation menu left */
+  /* Seitennavigation Verlinkungen*/
   .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
@@ -41,21 +45,51 @@ html, body {
     font-size: 25px;
     color: #f1f1f1;
     display: block;
-   
   }
   
-  /* When you mouse over the navigation links, change their color */
+  /* Die Verlinkungen in der Seitennavigation verändern die Farbe wenn man über sie hoverd */
   .sidenav a:hover {
     color: #c2b9b9;
   }
 
+/*NAVBAR OBEN*/
+/*Stil*/
+.navbar {
+  width: auto;
+  padding: 0px 140px;
+  background-color: rgb(123, 122, 122);
+  overflow: auto;
+  z-index:-1;
+}
 
-  /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+/* Navbar Icons nach rechts rechts */
+.navbar a {
+  float: right;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  z-index:1;
+}
+
+/* Navbar hover */
+.navbar a:hover {
+  background-color: #000;
+}
+
+/*////////////////////////BLACK MAGIC///////////////////*/
+/*Ein bisschen Responsive Design...*/
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
 
+  
+  @media screen and (max-width: 500px) {
+    .navbar a {
+      float: left;
+    }
+  }
   /*//////////////////////////MAIN/////////////////////////*/
   .main {
       font-family: helvetica;
@@ -65,10 +99,8 @@ html, body {
       background-color: black;
       overflow: hidden;
       margin-top: 0px;
-
   }
   
-
   .main h1{
       font-family: 'heyAugust';     
   }
@@ -79,90 +111,82 @@ html, body {
     padding-left: 15px;
     color: rgba(193,184,184,0.8);
   }
-
- 
   .main a:hover{
     color: white;
   }
   
-  /* Style the navigation bar */
-.navbar {
-    width: auto;
-    padding: 0px 140px;
-    background-color: rgb(123, 122, 122);
-    overflow: auto;
-    z-index:-1;
-   
-  }
-  
-  /* Navbar rechts */
-  .navbar a {
-    float: right;
-    padding: 12px;
-    color: white;
-    text-decoration: none;
-    font-size: 17px;
-    z-index:1;
-    
-  }
-  
-  /* Navbar links on mouse-over */
-  .navbar a:hover {
-    background-color: #000;
-  }
-  
-  /* Current/active navbar link */
-  .active {
-    background-color: #4CAF50;
-  }
-  
-  /* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels 
-  @media screen and (max-width: 500px) {
-    .navbar a {
-      float: none;
-      display: block;
-    }
-  }*/
-
-  .textEditor{
-    margin: 0 auto;
-    width: 750px; 
-    height: 300px;
+/*//////////////////////ALLE INPUT TYPES/ SUBMIT TYPES //////////////////////////////*/
+input[type="submit"]{
+  background: none;
+  border: 2px solid;
+  font: helvetica;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+  color: rgb(248, 148, 66);
+  transition: 0.4s ease;
 }
 
- .textEditor header {
-    border-bottom: none;
-    padding: 10px;
-    background-color: rgb(69, 27, 27);
-    color: rgba(194, 184, 184,0.8);
-    border-radius: 8px 8px 0px, 0px;
-}
-.textEditor header > button{
-    color:rgba(194, 184, 184,0.8);
-    border: none;
-    outline:none;
-    background-color: transparent;
-    cursor: pointer;
-}
-.textEditor header > button:hover{
-    color: white;  
+input[type="submit"]:hover, input[type="submit"]:focus{
+  box-shadow: inset 12em 0 0 0 rgb(248, 148, 66);
+  border-color: rgb(248, 148, 66);
+  color: #fff;
 }
 
-.headerbody{
-    border: 2px solid rgb(69,27,27);
-    height: 100%;
-    width: 746px;
-}
-.headerbody iframe:theWYSIWYG{
-    height: 100%;
-    width: 100%;
-}
-input[type ="color"]{
-    border: none; 
-    outline: none;
-    background-color: transparent;
+input[type="text"], input[type="email"], input[type="password"]{
+  background: black;
+  border: none;
+  padding: 0px 20px;
+  border-bottom: solid rgba(206, 199, 199, 0.2);
+  font-size: 20px;
+  color: rgb(224, 224, 224);
+  font: helvetica;
+  transition: .4s ease;
+  width:200px;
 }
 
+input[type="text"]:focus, input[type="text"]:hover, input[type="password"]:focus, input[type="password"]:hover, input[type="email"]:focus, input[type="email"]:hover{
+border-bottom: solid rgba(248,148,66);
+color: rgb(224, 224, 224);
+width: 250px;
+}
+
+input[type="number"]{
+  background-color: black;
+  border: black;
+  border-bottom: solid rgba(206, 199, 199, 0.2);
+  font-size: 18px; 
+  color: rgb(224, 224, 224);
+  font: helvetica;
+  margin-top: 10px;
+}
+
+input[type="number"]:focus, input{
+border-bottom: solid rgba(248,148,66);
+color: rgb(224, 224, 224);
+}
+.RButton fieldset{
+  border: black;
+}
+.radio-label{
+  background-color:rgb(248, 148, 66);
+  box-shadow: inset 0 0 0 4px rgb(123, 122, 122);
+}
+input[type="radio"]:checked+label { 
+  color:rgba(248,148,66);
+  font-weight: bold;
+ }
+
+ textarea{
+   background-color: black;
+   color: rgb(123, 122, 122);
+   font-size: 15px;
+   font: helvetica;
+ }
+/*Gedöns*/
+
+
+/* //////////////////////BUTTON IN RENTE
 button {
   margin-top: 60px;
   padding: 10px 20px;
@@ -182,6 +206,4 @@ button:hover{
   transform: translate(0px, -10px);
   box-shadow: 0px 30px 10px -10px rgba(206, 199, 199, 0.2);
 
-}
-
-/*Gedöns*/
+}*/

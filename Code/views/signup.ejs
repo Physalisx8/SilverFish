@@ -39,22 +39,22 @@
         <h1>Sign Up</h1> <!--die form wurde etwas angepasst. Wenn man submit drückt, soll eine Funktion aufgerufen werden, die die Message bei Bedarf ausgibt.-->
         <form action="/doRegister" method="POST" name="signup" onsubmit="return validateForm()">
              <!-- das Tag required bemerkt, dass eine Eingabe nötig sist.. er sendet eine short Notice, dass es so ist.-->
-            <p><label for="name">Name:</label><br>
-            <input type="text" name="name" id="name" required></p>
+            <p><label for="name">Name:</label><br></p>
+            <input type="text" name="name" id="name" required>
 
-            <p><label for="email">E-Mail:</label><br>
-            <input type="email" id="email" name="email" required> </p>
+            <p><label for="email">E-Mail:</label><br></p>
+            <input type="email" id="email" name="email" required> 
                 <!-- label setzt die Sachen schicker in Beziehung. Mit dem Tag minlength="6" wird die minimal Länge des PWs gefordert, 
                     falls das nicht gemacht wird, gibt's ne Nachricht-->
-            <p><label for="pass">Password (mind. 6 Zeichen):</label><br>
+            <p><label for="pass">Password (mind. 6 Zeichen):</label><br></p>
             <input type="password" id="pass" name="password" minlength="6" required>
 
             <!--Ich lasse eine Message einblenden, falls das Korrektur Passwort nicht mit dem eigentlichen Passwort übereinstimmt-->
             <p><%=msg%></p>
            
-            <label for="pass2">Password (mind. 6 Zeichen):</label><br>
-            <input type="password" id="pass2" minlength="6" name="pw2" required><br>
-            <button type="submit" value="doRegister" name="doRegister">abschicken</button>
+            <p><label for="pass2">Password (mind. 6 Zeichen):</label><br></p>
+            <input type="password" id="pass2" minlength="6" name="pw2" required><br><br><p></p>
+            <input type="submit" value="registrieren" name="doRegister">
         </form>
     </body>
 </html>
