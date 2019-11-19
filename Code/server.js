@@ -80,6 +80,16 @@ app.get('/logmain', function(req,res){
         res.render('main');
 }});
 
+
+//projekt löschen
+app.get('/geloscht', function(req,res){
+    res.render('Projektgeloscht');
+});
+
+app.get('/loschen', function(req,res){
+    res.render('Projektsicherloschen');
+});
+
 //Ausgabe des Registrieren Formulars
 app.get('/signup', function(req, res){
     //definiert die msg für die Fehlermeldung..
@@ -265,7 +275,7 @@ app.post('/logmain', function(req,res){
      });
 
          
-  //////* Ich versuche ein Projekt auszuwählen und das dann anzuzeigen
+  //////* ein Projekt auswählen und das dann anzeigen
 app.post('/doProjektwahl', function(req,res){
     const Projekt = req.body.Projektname;
     
@@ -289,6 +299,23 @@ app.post('/doProjektwahl', function(req,res){
  }});
 });
 
+
+function ProjektAusgabefFunktion(Projekt){
+    let sql2 = `SELECT * FROM Projekte WHERE Name="${Projekt}"`; 
+  
+         db2.all(sql2, function(err, rows){
+             if(err){
+                console.error(err);
+             }//Name nicht in Datenbank vorhanden
+             if(rows.length==0){
+                 const variable = "Projekt";
+                 res.render('Projekterror', {variable});
+                 console.log("VOLL");
+             } else{//name doch vorhanden
+                 res.render('Projektanzeigen',{Projekte:rows});
+  }});
+
+}
 
 /////* Profiländerungen speichern und dann auf MeinProfil
 
@@ -373,6 +400,8 @@ app.post('/doProjektanlegen', function(req,res){
 //wenn noch nicht vorhanden erstellt er es ab hier
     let sql10 = `INSERT INTO Projekte (Name, Fach, Beschreibung, Jahr) VALUES ("${ProjektName}", "${ProjektFach}", "${ProjektBeschreibung}", "${ProjektJahr}");`
    
+
+    
   if(ProjektFach!="AP" && ProjektFach!="MGD" || ProjektName =="" ){ //Prüft ob wichtige Angaben vorhanden und gültig
        res.render('projektanlegenerror'); 
     }else{
@@ -385,6 +414,32 @@ app.post('/doProjektanlegen', function(req,res){
         }}
     });
 });
+
+
+
+
+////////////////////////////////////// löscht ein projekt bei korrektem Lösch-Passwort
+app.post('/doProjektLoschen', function(req,res){
+    res.render('Projektsicherloschen');
+
+
+    app.post('/doProjektLoschen2', function(req,res){
+    const ProjektName =  req.body.name;
+       
+    let sql3 = `DELETE FROM Projekte WHERE Name= "${ProjektName}";`
+  
+   
+    db2.all(sql3,function(err, rows){
+                 if(err){
+                     res.render('logmain');
+                 }else{
+                    res.render('Projektgeloscht', {name : ProjektName});
+                 }
+    });
+});
+});
+
+
 
 
 

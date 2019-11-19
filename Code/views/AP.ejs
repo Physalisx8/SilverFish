@@ -41,9 +41,11 @@
                 <p><% for (Fach in Projekte){ %>
                    <%if (Fach == "AP"){ %>
                    <% for (Name in Projekte[Fach]){ %>
-                        <a href="Projektanzeigen.ejs"> <%=Name %><br></a>
+                        <a href="Projektanzeigen.ejs"> <%=Name %><br></a><br>
                    <%  } %>   <% } %>  <%    } %>
                    </p>
+                
+</script>
                               
 </form>
 </body>

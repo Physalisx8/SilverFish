@@ -15,38 +15,38 @@
  
 <!--Header -->
 <div class= "header">
-        <div class="img2">
-                <img src="MGDBanner.png" alt="BannerMain">
-</div>
+        <div class="img">
+            <img src="BannerMain.png" alt="BannerMain">
+        </div>
+        </div>
         
 <!-- top navigation bar-->
 <div class="navbar">
 <a href="projname"><i class="fa fa-fw fa-search"></i></a>
 <a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a>
 <a href="/logout"><i class="fa fa-sign-out"></i></a>
+
 </div>
 
 <!-- Side navigation, wenn man eingeloggt ist, verschwindet man-->
 <div class="sidenav">
-        <a href="main">Main</a>
-        <a href="FaecherJahre">Fächer</a>
-        <a href="Projektanlegen">Neues Projekt</a>
-        <a href="aboutus">About Us</a>
-        </div>
-
+    <a href="main">Main</a>
+    <a href="FaecherJahre">Fächer</a>
+    <a href="Projektanlegen">Neues Projekt</a>
+     <a href="aboutus">About Us</a>
+  
+    </div>
 
 <div class="main">
-        <h1>Media-Game-Design Projekt Übersicht</h1>
-     <p><% for (Fach in Projekte){ %>
-                <%if (Fach == "MGD"){ %>
-                <% for (Name in Projekte[Fach]){ %>
-                        <a href="Projektanzeigen.ejs"> <%=Name %><br></a><br>
-                <%  } %>   <% } %>  <%    } %>
-         </p>
-      
+    <h1>Bitte gib zu Bestätigung, dass du dir beim Löschen auch wirklich sicher bist, nocheinmal den Projektnamen ein:</h1><br>
 
+<form action="/doProjektLoschen2" method="POST">
 
-</form>
-</body>
-</html>
-</div>
+            <p><input type="text" name="name"><br></p>
+           <input type="submit" value="Projekt löschen">
+           
+
+        </form>
+    </body>
+    </html>
+    </div>
