@@ -105,7 +105,7 @@ app.get('/Projektanzeigen', function(req,res){
 
 //Anlegen eines Projektes
 app.get('/Projektanlegen', function(req,res){
-    res.render('Projektanlegen');
+    res.render('Projektanlegen', {msgp :""});
 });
 
 //Ausgabe Über uns
@@ -360,12 +360,13 @@ app.post('/doProjektanlegen', function(req,res){
     const ProjektBeschreibung= req.body.ProjektBeschreibung;
     const ProjektFach=req.body.ProjektFach;
     const ProjektJahr=req.body.ProjektJahr;
+    const msgp="Den Namen gibt es bereits"
   
   
     let sql15 = `SELECT * FROM Projekte WHERE Name="${ProjektName}";` //Prüft, ob name de Projektes schon verhanden ist
     db2.all(sql15,function(err, rows){
        if(rows.length!=0){
-            res.render('projektanlegenerror');
+            res.render('projektanlegen', {msgp: msgp});
             console.log(rows.length);
         }else{ 
 

@@ -12,6 +12,7 @@ html, body {
 .header {
     top: 0;
   }
+
 .header img {
     width:100%;
     height:100%;
@@ -114,6 +115,19 @@ html, body {
   .main a:hover{
     color: white;
   }
+
+  /*für die Fehlermeldungen*/
+  .o{
+    color: rgb(248, 148, 66);
+    font-family: helvetica;
+    font-weight: bold;
+  }
+
+  .j{
+    color: rgb(248, 148, 66);
+    font-weight: bold;
+  }
+  
   
 /*//////////////////////ALLE INPUT TYPES/ SUBMIT TYPES //////////////////////////////*/
 input[type="submit"]{
