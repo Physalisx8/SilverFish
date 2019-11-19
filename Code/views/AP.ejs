@@ -37,11 +37,12 @@
 
 
 <div class="main">
-                <h1>Angewadnte Programmierung Projekt Übersicht</h1>
+                <h1>Angewandte Programmierung Projekt Übersicht</h1>
                 <p><% for (Fach in Projekte){ %>
                    <%if (Fach == "AP"){ %>
                    <% for (Name in Projekte[Fach]){ %>
-                        <a href="Projektanzeigen.ejs"> <%=Name %><br></a><br>
+                        
+                        <a href="/doProjektwahl/<%= Projekte[Fach].Name %>"><%=Name %></a><br><br>
                    <%  } %>   <% } %>  <%    } %>
                    </p>
                 
