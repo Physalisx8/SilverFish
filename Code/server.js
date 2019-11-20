@@ -416,9 +416,20 @@ app.post('/doProjektanlegen', function(req,res){
     const ProjektFach=req.body.ProjektFach;
     const ProjektJahr=req.body.ProjektJahr;
     const msgp="Den Namen gibt es bereits"
+    const file = req.files.filetoupload;  
+    fileName = file.name;
   
-  
-    let sql15 = `SELECT * FROM Projekte WHERE Name="${ProjektName}";` //Prüft, ob name de Projektes schon verhanden ist
+    let sql55 = `SELECT * FROM Projekte WHERE Name="${ProjektName}";` //Prüft, ob name de Projektes schon verhanden ist
+    let sql15 = `SELECT * FROM Projkete WHERE Bild="${fileName}";`
+
+    db.all(sql55,function(err, rows){
+        if(rows.length!=0){
+            res.render('registrierungsfehler');
+        //checkt das erste Passwort mit dem zweiten gegen und gibt ne Fehlermeldung aus.
+        }
+    });
+   
+    
     db2.all(sql15,function(err, rows){
        if(rows.length!=0){
             res.render('projektanlegen', {msgp: msgp});
@@ -426,22 +437,23 @@ app.post('/doProjektanlegen', function(req,res){
 
         }else{ 
 
-            if (!req.files || Object.keys(req.files).length === 0) {
-                res.send("Es wurde keine Datei zum hochladen ausgewählt");
+            if (!req.files || Object.keys(req.files).length === 0) { 
+                res.send("Es wurde keine Datei zum hochladen ausgewählt");  //Fehlermeldung 
             } else {
-                const file = req.files.filetoupload;
-            //  const file = req.files["myFreshFile"];
-                file.mv(__dirname + "/Pic/" + file.name, function(err) {
+                //let sql222= `INSERT INTO Projekte (Bild) VALUES ("${file.name}"); WHERE Name= "${ProjektName}";`
+                         
+                file.mv(__dirname + "/Pic/" + file.name, function(err) {  //Ziel Ordner für das Bild
+                    fileName = file.name;
                     if(err) {
                         console.error(err);
                         res.send("Ein Fehler ist aufgetreten");
                     } 
                 });  
-
             }
-
+            
+            fileName = file.name;
 //wenn noch nicht vorhanden erstellt er es ab hier
-    let sql10 = `INSERT INTO Projekte (Name, Fach, Beschreibung, Jahr) VALUES ("${ProjektName}", "${ProjektFach}", "${ProjektBeschreibung}", "${ProjektJahr}");`
+    let sql10 = `INSERT INTO Projekte (Name, Fach, Beschreibung, Jahr, Bild) VALUES ("${ProjektName}", "${ProjektFach}", "${ProjektBeschreibung}", "${ProjektJahr}", "${fileName}");`
    
 
     
