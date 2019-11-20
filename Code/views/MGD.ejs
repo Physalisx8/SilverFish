@@ -37,12 +37,13 @@
 
 <div class="main">
         <h1>Media-Game-Design Projekt Übersicht</h1>
-     <p><% for (Fach in Projekte){ %>
-                <%if (Fach == "MGD"){ %>
-                <% for (Name in Projekte[Fach]){ %>
-                        <a href="Projektanzeigen.ejs"> <%=Name %><br></a><br>
-                <%  } %>   <% } %>  <%    } %>
-         </p>
+        <p><% for (Fach in Projekte){ %>
+           <%if (Fach == "MGD"){ %>
+           <% for (Name in Projekte[Fach]){ %>
+                
+                <a href="/doProjektwahl/<%= Projekte[Fach][Name][0].Nummer %>"><%=Name %></a><br><br>
+           <%  } %>   <% } %>  <%    } %>
+           </p>
       
 
 

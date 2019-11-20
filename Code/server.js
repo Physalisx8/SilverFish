@@ -300,6 +300,29 @@ app.post('/doProjektwahl', function(req,res){
 });
 
 
+
+app.get('/doProjektwahl/:Nummer', function(req,res){
+    const Nummer = req.params.Nummer;
+   
+    
+
+   let sql2 = `SELECT * FROM Projekte WHERE Nummer="${Nummer}"`; 
+ 
+        db2.all(sql2, function(err, rows){
+            if(err){
+               console.error(err);
+            }//Name nicht in Datenbank vorhanden
+            if(rows.length==0){
+                const variable = "Projekt";
+                res.render('Projekterror', {variable});
+                console.log("VOLL");
+            } else{//name doch vorhanden
+                res.render('Projektanzeigen',{Projekte:rows});
+ }});
+});
+
+
+
 function ProjektAusgabefFunktion(Projekt){
     let sql2 = `SELECT * FROM Projekte WHERE Name="${Projekt}"`; 
   

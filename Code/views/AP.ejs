@@ -42,7 +42,7 @@
                    <%if (Fach == "AP"){ %>
                    <% for (Name in Projekte[Fach]){ %>
                         
-                        <a href="/doProjektwahl/<%= Projekte[Fach].Name %>"><%=Name %></a><br><br>
+                        <a href="/doProjektwahl/<%= Projekte[Fach][Name][0].Nummer %>"><%=Name %></a><br><br>
                    <%  } %>   <% } %>  <%    } %>
                    </p>
                 
