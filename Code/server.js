@@ -418,19 +418,12 @@ app.post('/doProjektanlegen', function(req,res){
     const msgp="Den Namen gibt es bereits"
     const file = req.files.filetoupload;  
     fileName = file.name;
-  
-    let sql55 = `SELECT * FROM Projekte WHERE Name="${ProjektName}";` //Prüft, ob name de Projektes schon verhanden ist
-    let sql15 = `SELECT * FROM Projkete WHERE Bild="${fileName}";`
-
-    db.all(sql55,function(err, rows){
-        if(rows.length!=0){
-            res.render('registrierungsfehler');
-        //checkt das erste Passwort mit dem zweiten gegen und gibt ne Fehlermeldung aus.
-        }
-    });
-   
     
-    db2.all(sql15,function(err, rows){
+  
+    let sql15 = `SELECT * FROM Projekte WHERE Name="${ProjektName}";` //Prüft, ob name de Projektes schon verhanden ist
+   
+
+    db2.all(sql15,function(err, rows){   //Hier war die funktion sql55 nicht sql15
        if(rows.length!=0){
             res.render('projektanlegen', {msgp: msgp});
             console.log(rows.length);
@@ -448,10 +441,26 @@ app.post('/doProjektanlegen', function(req,res){
                         console.error(err);
                         res.send("Ein Fehler ist aufgetreten");
                     } 
+
+                //Test, muss vllt später gelöscht werden
+               // let sql500 = `SELECT * FROM Projekte WHERE Bild="${fileName}";`
+                let sql500 = `SELECT Bild CASE '${fileName}' THEN 'Already Exists' ELSE 'Does not Exist' END FROM Projekte WHERE Bild="${fileName}");`
+                db2.all(sql500,function(err, rows){
+                    
+                    if(rows.length!=0){
+                         res.send('BildDupe', {msgp: msgp});
+                         console.log(rows.length);
+             
+                     }
+                    });
+
                 });  
             }
+
             
-            fileName = file.name;
+
+            
+            
 //wenn noch nicht vorhanden erstellt er es ab hier
     let sql10 = `INSERT INTO Projekte (Name, Fach, Beschreibung, Jahr, Bild) VALUES ("${ProjektName}", "${ProjektFach}", "${ProjektBeschreibung}", "${ProjektJahr}", "${fileName}");`
    
