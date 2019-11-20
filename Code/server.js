@@ -28,6 +28,11 @@ app.use(session({
     saveUninitialized: true
 }));
 
+const fileupload = require('express-fileupload');
+app.use(fileupload({
+    createParentPath: true
+}));
+
 
 /////////////////* FREIGABEN *///////////////////
 
@@ -418,7 +423,22 @@ app.post('/doProjektanlegen', function(req,res){
        if(rows.length!=0){
             res.render('projektanlegen', {msgp: msgp});
             console.log(rows.length);
+
         }else{ 
+
+            if (!req.files || Object.keys(req.files).length === 0) {
+                res.send("Es wurde keine Datei zum hochladen ausgewählt");
+            } else {
+                const file = req.files.filetoupload;
+            //  const file = req.files["myFreshFile"];
+                file.mv(__dirname + "/Pic/" + file.name, function(err) {
+                    if(err) {
+                        console.error(err);
+                        res.send("Ein Fehler ist aufgetreten");
+                    } 
+                });  
+
+            }
 
 //wenn noch nicht vorhanden erstellt er es ab hier
     let sql10 = `INSERT INTO Projekte (Name, Fach, Beschreibung, Jahr) VALUES ("${ProjektName}", "${ProjektFach}", "${ProjektBeschreibung}", "${ProjektJahr}");`
@@ -437,8 +457,6 @@ app.post('/doProjektanlegen', function(req,res){
         }}
     });
 });
-
-
 
 
 ////////////////////////////////////// löscht ein projekt bei korrektem Lösch-Passwort
@@ -461,10 +479,6 @@ app.post('/doProjektLoschen', function(req,res){
     });
 });
 });
-
-
-
-
 
 
 //Auswertung nach der Registrierung
@@ -503,7 +517,7 @@ db.all(sql5,function(err, rows){
 
 
  //Auswertung von der Fileupload in server
- app.post('/fileupload', function (req, res) {
+/*app.post('/fileupload', function (req, res) {
   
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
@@ -516,6 +530,6 @@ db.all(sql5,function(err, rows){
       });
  });
 });
-
+*/
 /////////////////*FUNKTIONEN*///////////////////////////////
 /* neue js. datei anlegen*/

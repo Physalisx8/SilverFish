@@ -40,7 +40,7 @@
 
 <div class="main">
     <h1>Mein neues Projekt</h1>
-    <form action="/doProjektanlegen" method="POST">
+    <form action="/doProjektanlegen" method="POST" enctype="multipart/form-data">
 
       <p><label for="pName">Projektname:</label><br></p>
       <p><input type="text" id ="pName" name="ProjektName" required>
@@ -63,7 +63,10 @@
         <b>Beschreibung:</b><br>
         Hier kannst du auch die Namen der mitwirkenden Studierenden angeben, falls diese das möchten.
         So haben die anderen Studierenden die Möglichkeit sich über die HAW-Mail mit euch zu vernetzen.
-       <p><textarea required id="text" name="ProjektBeschreibung" cols="81" rows="10"></textarea></p>
+       <p><textarea required id="text" name="ProjektBeschreibung" cols="81" rows="10"></textarea></p> <br>
+
+       <input type="file" name="filetoupload"><br>
+       
        <input type="submit" value="Projekt anlegen">
     </form>
 </body>
