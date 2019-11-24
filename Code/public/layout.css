@@ -1,9 +1,12 @@
 
 /*CSS SHEET OMG*/
 /*für die wichtigsten Sachen*/
+
+
 html, body {
-    background-color: black;
-    height: 100%;
+    background-color: rgb(35, 35, 35) ;
+    height: 200%;
+    width: 100%;
     max-width: 1000px;
     margin: auto;
 }
@@ -22,6 +25,7 @@ html, body {
 /*Schrift einstellen und für alle zugänglich machen*/
 @font-face { 
     font-family: 'heyAugust';
+    font-weight: lighter;
     src: url(heyAugust.ttf);
 }
   
@@ -29,7 +33,7 @@ html, body {
 
 /*Seitennavigation mit festgelegter Breite, höhe und der Position, Farbe, Anordnung der Schrift usw.*/
 .sidenav {
-  height: 100%;
+  height:1000px;
   width: 110px;
   position: relative;
   background-color: rgb(123, 122, 122);
@@ -95,15 +99,21 @@ html, body {
   .main {
       font-family: helvetica;
       color: rgba(194, 184, 184,0.8);
-      margin: 140px;
-      padding: 0;
+      margin: 110px;
+      padding-left: 60px;
+      padding-top: 20px;
+      padding-right: 150px;
       background-color: black;
       overflow: hidden;
       margin-top: 0px;
+      height: 1981px;
+      width: 68%;
   }
+
   
   .main h1{
-      font-family: 'heyAugust';     
+      font-family: 'heyAugust';  
+      font-weight: lighter;
   }
 
   .main a{
