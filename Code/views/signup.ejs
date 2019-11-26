@@ -15,47 +15,45 @@
  
 <!--Header -->
 <div class= "header">
-    <div class="img">
-        <img src="BannerMain.png" alt="BannerMain">
+<div class="img">
+    <img src="BannerMain.png" alt="BannerMain">
+</div>
 </div>
         
 <!-- top navigation bar-->
 <div class="navbar">
 <a href="login"><i class="fa fa-fw fa-user"></i></a>
-
 </div>
 
-
-<!-- Side navigation -->
+<!-- sidebar..-->
 <div class="sidenav">
-<a href="main">Main</a>
-<a href="login">Login</a>
-<a href="signup">Sign Up</a>
-</div>
-
-<p></p>
+    <a href="main">Main</a>
+    <a href="login">Login</a>
+    <a href="signup">Sign Up</a>
+    </div>
 
 <div class="main">
-        <h1>Sign Up</h1> <!--die form wurde etwas angepasst. Wenn man submit drückt, soll eine Funktion aufgerufen werden, die die Message bei Bedarf ausgibt.-->
-        <form action="/doRegister" method="POST" name="signup">
-             <!-- das Tag required bemerkt, dass eine Eingabe nötig sist.. er sendet eine short Notice, dass es so ist.-->
-            <p><label for="name">Name:</label><br></p>
-            <input type="text" name="name" id="name" required>
 
-            <p><label for="email">E-Mail:</label><br></p>
-            <input type="email" id="email" name="email" required> 
-                <!-- label setzt die Sachen schicker in Beziehung. Mit dem Tag minlength="6" wird die minimal Länge des PWs gefordert, 
-                    falls das nicht gemacht wird, gibt's ne Nachricht-->
-            <p><label for="pass">Password (mind. 6 Zeichen):</label><br></p>
-            <input type="password" id="pass" name="password" pattern="(?=.*\d)(?=.[a-z])(?=.*[A-Z]).{6,}" title="Mindestens 6 Zeichen, eine Zahl, ein Groß- und ein Kleinbuchstabe" minlength="6" required>
+    <h1>Sign Up</h1> <!--die form wurde etwas angepasst. Wenn man submit drückt, soll eine Funktion aufgerufen werden, die die Message bei Bedarf ausgibt.-->
+    <form action="/doRegister" method="POST" name="signup">
+         <!-- das Tag required bemerkt, dass eine Eingabe nötig sist.. er sendet eine short Notice, dass es so ist.-->
+        <p><label for="name">Name:</label><br></p>
+        <input type="text" name="name" id="name" required>
 
-            <!--Ich lasse eine Message einblenden, falls das Korrektur Passwort nicht mit dem eigentlichen Passwort übereinstimmt-->
-            <p><div class="o"><%=msg%></div></p>
-           
-            <p><label for="pass2">Password (mind. 6 Zeichen):</label><br></p>
-            <input type="password" id="pass2" minlength="6" pattern="(?=.*\d)(?=.[a-z])(?=.*[A-Z]).{6,}" title="Mindestens 6 Zeichen, eine Zahl, ein Groß- und ein Kleinbuchstabe"  name="pw2" required><br><br><p></p>
-            <input type="submit" value="registrieren" name="doRegister">
-        </form>
+        <p><label for="email">E-Mail:</label><br></p>
+        <input type="email" id="email" name="email" required> 
+            <!-- label setzt die Sachen schicker in Beziehung. Mit dem Tag minlength="6" wird die minimal Länge des PWs gefordert, 
+                falls das nicht gemacht wird, gibt's ne Nachricht-->
+        <p><label for="pass">Password (mind. 6 Zeichen):</label><br></p>
+        <input type="password" id="pass" name="password" pattern="(?=.*\d)(?=.[a-z])(?=.*[A-Z]).{6,}" title="Mindestens 6 Zeichen, eine Zahl, ein Groß- und ein Kleinbuchstabe" minlength="6" required>
+
+        <!--Ich lasse eine Message einblenden, falls das Korrektur Passwort nicht mit dem eigentlichen Passwort übereinstimmt-->
+        <p><div class="o"><%=msg%></div></p>
+       
+        <p><label for="pass2">Password (mind. 6 Zeichen):</label><br></p>
+        <input type="password" id="pass2" minlength="6" pattern="(?=.*\d)(?=.[a-z])(?=.*[A-Z]).{6,}" title="Mindestens 6 Zeichen, eine Zahl, ein Groß- und ein Kleinbuchstabe"  name="pw2" required><br><br><p></p>
+        <input type="submit" value="registrieren" name="doRegister">
+    </form>
+    </div>
     </body>
 </html>
-</div>

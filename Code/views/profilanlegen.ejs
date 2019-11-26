@@ -1,43 +1,40 @@
 <!DOCTYPE html>
 <html>
-<!--Head-->
-<head>
-
-<meta charset="utf-8">
-<link href="layout.css" rel="stylesheet" type="text/css"/>
+    <head>
+        <meta charset="utf-8">
+    <link href="layout.css" rel="stylesheet" type="text/css"/>
 
  <!-- Load an icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-
-<!--Body-->
-<body>
- 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+         
 <!--Header -->
 <div class= "header">
     <div class="img">
         <img src="BannerMain.png" alt="BannerMain">
-</div>
-        
-<!-- top navigation bar-->
-<div class="navbar">
-<a href="projname"><i class="fa fa-fw fa-search"></i></a>
-<a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a>
-<a href="/logout"><i class="fa fa-sign-out"></i></a>
-</div>
-
-
-<!-- Side navigation, wenn man eingeloggt ist, verschwindet man-->
-<div class="sidenav">
-<a href="main">Main</a>
-<a href="FaecherJahre">Fächer</a>
-<a href="Projektanlegen">Neues Projekt</a>
-<a href="aboutus">About Us</a>
-
-
-</div>
-<!--label setzt die Eingabefelder schicker mit dem beschreibenden Text zusammen. Die id weist die Labels ihre Zugehörigkeit zu.-->
-<div class="main">
+    </div>
+    </div>
+            
+    <!-- top navigation bar-->
+    <div class="navbar">
+    <a href="projname"><i class="fa fa-fw fa-search"></i></a>
+    <a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a>
+    <a href="/logout"><i class="fa fa-sign-out"></i></a>
+    </div>
+    
+    
+    <!-- Side navigation -->
+    <div class="sidenav">
+    <a href="main">Main</a>
+    <a href="FaecherJahre">Fächer</a>  
+    <a href="Projektanlegen">Neues Projekt</a>
+    <a href="aboutus">About Us</a>
+  
+    </div>
+    
+    <div class="main">
+    
         <h1>Mein Profil ändern</h1>
    
         <form action="/doProfilandern" method="POST">
@@ -60,6 +57,11 @@
                 <input type="submit" value="Speichern" name="Speichern">
             
         </form>
-    </body>
-</html>
-</div>
+
+        </div>
+        </body>
+    </html>
+    
+    
+
+     

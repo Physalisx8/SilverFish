@@ -25,36 +25,31 @@
 <a href="login"><i class="fa fa-fw fa-user"></i></a>
 </div>
 
-
-<!-- Side navigation -->
+<!-- sidebar..-->
 <div class="sidenav">
-<a href="main">Main</a>
-<a href="login">Login</a>
-<a href="signup">Sign Up</a>
-</div>
+    <a href="main">Main</a>
+    <a href="login">Login</a>
+    <a href="signup">Sign Up</a>
+    </div>
 
 <div class="main">
 
-      
-      <!-- main Text -->
-       
-
-      <% if(typeof name !== 'undefined' && name !== null){%>
-        <h1>Willkommen</h1> <br><%name%>
-        <p>Du bist erfolgreich angemeldet!<br>
-    <%} %>
-    <% if(typeof name == 'undefined' || name == null){%>
-        <h1>Ey ! </h1> <br>
-        <p>Wir wollen wirklich Beides. Jaha, Username und Passwort.<br>
-            Du hast dich wohl leider vertippt, oder wolltest einfach nicht beides preisgeben</p>
-        <p>Bitte versuche es erneut:
-                <a href="login">Login</a><br> oder <a href="signup">Sign Up</a><br>
-    <%} %>
-    
-
+        <% if(typeof name !== 'undefined' && name !== null){%>
+            <h1>Willkommen</h1> <br><%name%>
+            <p>Du bist erfolgreich angemeldet!<br>
+        <%} %>
+        <% if(typeof name == 'undefined' || name == null){%>
+            <h1>Ey ! </h1> <br>
+            <p>Wir wollen wirklich Beides. Jaha, Username und Passwort.<br>
+                Du hast dich wohl leider vertippt, oder wolltest einfach nicht beides preisgeben</p>
+            <p>Bitte versuche es erneut:
+                    <a href="login">Login</a><br> oder <a href="signup">Sign Up</a><br>
+        <%} %>
         
-     
-
-    </div>
-    </body>
-</html>
+    
+        
+        </div>
+        </body>
+    </html>
+    
+   

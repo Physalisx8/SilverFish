@@ -2,15 +2,12 @@
 /*CSS SHEET OMG*/
 /*für die wichtigsten Sachen*/
 
-
 html, body {
-  zoom: 1.3;
     background-color: rgb(35, 35, 35) ;
     height: 200%;
     width: 150%;
     max-width: 1000px;
-    margin-left: 220px;
-    margin-right: auto;
+    margin:auto;
 }
 
 /*Header Banner CSS*/
@@ -19,7 +16,7 @@ html, body {
   }
 
 .header img {
-    width:1000px;
+    width:100%;
     height:10%;
   }
 
@@ -35,8 +32,8 @@ html, body {
 
 /*Seitennavigation mit festgelegter Breite, höhe und der Position, Farbe, Anordnung der Schrift usw.*/
 .sidenav {
-  height:1000px;
-  width: 110px;
+  height: 200%; 
+  width: 110px; 
   position: relative;
   background-color: rgb(123, 122, 122);
   float: left;
@@ -105,23 +102,22 @@ html, body {
       margin: 110px;
       padding-left: 60px;
       padding-top: 20px;
-      padding-right: 150px;
+      padding-right: 130px;
       background-color: black;
       overflow: hidden;
       margin-top: 0px;
-      height: 1981px;
-      width: 68%;
+      height: 200%;
+      width: 70%;
+      display: block;
   }
 
   
   .main h1{
       font-family: 'heyAugust';  
-      font-weight: lighter;
   }
 
   .main a{
     font-family: 'heyAugust';
-    font-weight: lighter;
     font-size: 25px;
     padding-left: 15px;
     color: rgba(193,184,184,0.8);
