@@ -63,6 +63,14 @@ let db2 = new sqlite3.Database('datenbanken.db', function(err) {
     }
 });
 
+let db3 = new sqlite3.Database('Bilder.db', function(err) {
+    if (err) { 
+        console.error(err); 
+    } else {
+        console.log("Verbindung zur Datenbank der Projekte wurde auch hergestellt.")
+    }
+});
+
 
 
 ///////////////////*AUSGABEN*///////////////////////
@@ -444,27 +452,22 @@ app.post('/doProjektanlegen', function(req,res){
 
                 //Test, muss vllt später gelöscht werden
                // let sql500 = `SELECT * FROM Projekte WHERE Bild="${fileName}";`
-                let sql500 = `SELECT Bild CASE '${fileName}' THEN 'Already Exists' ELSE 'Does not Exist' END FROM Projekte WHERE Bild="${fileName}");`
+               /* let sql500 = `SELECT Bild CASE '${fileName}' THEN 'Already Exists' ELSE 'Does not Exist' END FROM Projekte WHERE Bild="${fileName}");`
                 db2.all(sql500,function(err, rows){
                     
                     if(rows.length!=0){
                          res.send('BildDupe', {msgp: msgp});
                          console.log(rows.length);
-             
                      }
-                    });
-
+                    });*/
                 });  
             }
-
-            
-
-            
+                
             
 //wenn noch nicht vorhanden erstellt er es ab hier
     let sql10 = `INSERT INTO Projekte (Name, Fach, Beschreibung, Jahr, Bild) VALUES ("${ProjektName}", "${ProjektFach}", "${ProjektBeschreibung}", "${ProjektJahr}", "${fileName}");`
-   
-
+    //let sql10 = `INSERT INTO Projekte (FotoName, Foto ID) VALUES ("${fileName}", "${ProID}");`
+    let sql13 = `INSERT INTO Bilder (FotoName, Foto ID) VALUES ("${fileName}", (SELECT Nummer FROM Projekte));`
     
   if(ProjektFach!="AP" && ProjektFach!="MGD" || ProjektName =="" ){ //Prüft ob wichtige Angaben vorhanden und gültig
        res.render('projektanlegenerror'); 
@@ -474,10 +477,17 @@ app.post('/doProjektanlegen', function(req,res){
                console.error(err);
             }else{
                res.render('Projektangelegt', {name : ProjektName});
-           }});
+
+        db3.get(sql13, function(err, row){
+            if(err){
+               console.error(err);
+            }
+            });
         }}
+    )};
+    }});
     });
-});
+
 
 
 ////////////////////////////////////// löscht ein projekt bei korrektem Lösch-Passwort
