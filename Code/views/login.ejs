@@ -1,55 +1,54 @@
 <!DOCTYPE html>
 <html>
-<!--Head-->
-<head>
+    <!--Head-->
+    <head>
+        <meta charset="utf-8">
+        <link href="layout.css" rel="stylesheet" type="text/css"/>
 
-<meta charset="utf-8">
-<link href="layout.css" rel="stylesheet" type="text/css"/>
+        <!-- Load an icon library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
 
- <!-- Load an icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-
-<!--Body-->
-<body>
+    <!--Body-->
+    <body>
  
-<!--Header -->
-<div class= "header">
-<div class="img">
-    <img src="BannerMain.png" alt="BannerMain">
-</div>
-</div>
+    <!--Header -->
+    <div class= "header">
+        <div class="img">
+            <img src="BannerMain.png" alt="BannerMain">
+        </div>
+    </div>
         
-<!-- top navigation bar-->
-<div class="navbar">
-<a href="login"><i class="fa fa-fw fa-user"></i></a>
-</div>
-
-<!-- sidebar..-->
-<div class="sidenav">
-    <a href="main">Main</a>
-    <a href="login">Login</a>
-    <a href="signup">Sign Up</a>
+    <!-- top navigation bar-->
+    <div class="navbar">
+        <a href="login"><i class="fa fa-fw fa-user"></i></a>
     </div>
 
-<div class="main">
+    <!-- sidebar..-->
+    <div class="sidenav">
+        <a href="main">Main</a>
+        <a href="login">Login</a>
+        <a href="signup">Sign Up</a>
+    </div>
 
-    <h1>Login</h1>
-    <form method="POST" action="/logmain" name="login">
+    <!--main Inhalt-->
+    <div class="main">
 
-        <p><label for="user">Username:</label><br></p>
-        <input type="text" name="name" id="user">
+        <h1>Login</h1>
+        <form method="POST" action="/logmain" name="login">
 
-        <p><label for="pwl">Password (mind. 6 Zeichen):</label><br></p>
-        <input type="password" id="pwl" name="password" minlength="6" required><br><br><p>
-              
-        </p>
-        <input type="submit" value="login" name="login">
-    </form>
+            <p><label for="user">Username:</label><br></p>
+            <input type="text" name="name" id="user">
+
+            <p><label for="pwl">Password (mind. 6 Zeichen):</label><br></p>
+            <input type="password" id="pwl" name="password" minlength="6" required><br><br><p>   
+            </p>
+            <input type="submit" value="login" name="login">
+        </form>
 
         
     </div>
-    </body>
+</body>
 </html>
 
    

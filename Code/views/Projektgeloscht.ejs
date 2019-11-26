@@ -1,43 +1,46 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-    <link href="layout.css" rel="stylesheet" type="text/css"/>
-
- <!-- Load an icon library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
-    <body>
-         
-<!--Header -->
-<div class= "header">
-    <div class="img">
-        <img src="BannerMain.png" alt="BannerMain">
-    </div>
-    </div>
-            
-    <!-- top navigation bar-->
-    <div class="navbar">
-    <a href="projname"><i class="fa fa-fw fa-search"></i></a>
-    <a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a>
-    <a href="/logout"><i class="fa fa-sign-out"></i></a>
-    </div>
-    
-    
-    <!-- Side navigation -->
-    <div class="sidenav">
-    <a href="main">Main</a>
-    <a href="FaecherJahre">Fächer</a>  
-    <a href="Projektanlegen">Neues Projekt</a>
-    <a href="aboutus">About Us</a>
+<!DOCTYPE html> 
+<html> 
+<!--Head--> 
+<head> 
+ 
+<meta charset="utf-8"> 
+<link href="layout.css" rel="stylesheet" type="text/css"/> 
+ 
+ <!-- Load an icon library --> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+</head> 
+ 
+<!--Body--> 
+<body> 
   
-    </div>
-    
+<!--Header --> 
+<div class= "header"> 
+    <div class="img"> 
+        <img src="BannerMain.png" alt="BannerMain"> 
+    </div> 
+</div> 
+         
+<!-- top navigation bar--> 
+<div class="navbar"> 
+<a href="projname"><i class="fa fa-fw fa-search"></i></a> 
+<a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a> 
+<a href="/logout"><i class="fa fa-sign-out"></i></a> 
+</div> 
+ 
+<!-- Side Navigation--> 
+<div class="sidenav"> 
+    <a href="main">Main</a> 
+    <a href="FaecherJahre">Fächer</a> 
+    <a href="Projektanlegen">Neues Projekt</a> 
+    <a href="aboutus">About Us</a>
+</div> 
+
+<!--Main Inhalt-->
     <div class="main">
-    
-      
-    <h2>Projekt <%=name%> wurde erfolgreich gelöscht!</h2>
-    
-        </div>
-        </body>
-    </html>
+        <h1><div class="j"><%=name%></div></h1>
+        wurde erfolgreich gelöscht
+
+    </div>
+
+</body>
+</html>

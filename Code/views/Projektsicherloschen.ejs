@@ -1,47 +1,48 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-    <link href="layout.css" rel="stylesheet" type="text/css"/>
-
- <!-- Load an icon library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
-    <body>
-         
-<!--Header -->
-<div class= "header">
-    <div class="img">
-        <img src="BannerMain.png" alt="BannerMain">
-    </div>
-    </div>
-            
-    <!-- top navigation bar-->
-    <div class="navbar">
-    <a href="projname"><i class="fa fa-fw fa-search"></i></a>
-    <a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a>
-    <a href="/logout"><i class="fa fa-sign-out"></i></a>
-    </div>
-    
-    
-    <!-- Side navigation -->
-    <div class="sidenav">
-    <a href="main">Main</a>
-    <a href="FaecherJahre">Fächer</a>  
-    <a href="Projektanlegen">Neues Projekt</a>
-    <a href="aboutus">About Us</a>
+<!DOCTYPE html> 
+<html> 
+<!--Head--> 
+<head> 
+ 
+<meta charset="utf-8"> 
+<link href="layout.css" rel="stylesheet" type="text/css"/> 
+ 
+ <!-- Load an icon library --> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+</head> 
+ 
+<!--Body--> 
+<body> 
   
-    </div>
-    
-    <div class="main">
-    
-        <h1>Bitte gib zu Bestätigung, dass du dir beim Löschen auch wirklich sicher bist, nocheinmal den Projektnamen ein:</h1><br>
+<!--Header --> 
+<div class= "header"> 
+    <div class="img"> 
+        <img src="BannerMain.png" alt="BannerMain"> 
+    </div> 
+</div> 
+         
+<!-- top navigation bar--> 
+<div class="navbar"> 
+<a href="projname"><i class="fa fa-fw fa-search"></i></a> 
+<a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a> 
+<a href="/logout"><i class="fa fa-sign-out"></i></a> 
+</div> 
+ 
+<!-- Side Navigation--> 
+<div class="sidenav"> 
+    <a href="main">Main</a> 
+    <a href="FaecherJahre">Fächer</a> 
+    <a href="Projektanlegen">Neues Projekt</a> 
+    <a href="aboutus">About Us</a>
+</div> 
+ 
+<div class="main"> 
+    <h1>Bist du dir sicher?</h1>
+    Bitte bestätige die Aktion, indem du den Namen des Projekts eingibst.
+    <form action="/doProjektLoschen2" method="POST"> 
+        <p><input type="text" name="name"><br></p> 
+        <input type="submit" value="Projekt löschen"> 
+    </form> 
 
-        <form action="/doProjektLoschen2" method="POST">
-        
-                    <p><input type="text" name="name"><br></p>
-                   <input type="submit" value="Projekt löschen">
-                   
-        </div>
-        </body>
-    </html>
+</div>
+</body> 
+</html> 
