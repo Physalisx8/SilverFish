@@ -39,6 +39,8 @@ app.use(fileupload({
 //Freigabe des public Ordners
 app.use(express.static(__dirname + '/public'));
 
+app.use(express.static(__dirname + '/Pic'));
+
 
 
 //////////////////////* DATENBANKEN *//////////////////////
@@ -465,25 +467,26 @@ app.post('/doProjektanlegen', function(req,res){
                 
             
 //wenn noch nicht vorhanden erstellt er es ab hier
-    let sql10 = `INSERT INTO Projekte (Name, Fach, Beschreibung, Jahr, Bild) VALUES ("${ProjektName}", "${ProjektFach}", "${ProjektBeschreibung}", "${ProjektJahr}", "${fileName}");`
+    let sql10 = `INSERT INTO Projekte (Name, Fach, Beschreibung, Jahr) VALUES ("${ProjektName}", "${ProjektFach}", "${ProjektBeschreibung}", "${ProjektJahr}");`
     //let sql10 = `INSERT INTO Projekte (FotoName, Foto ID) VALUES ("${fileName}", "${ProID}");`
-    let sql13 = `INSERT INTO Bilder (FotoName, Foto ID) VALUES ("${fileName}", (SELECT Nummer FROM Projekte));`
+    
     
   if(ProjektFach!="AP" && ProjektFach!="MGD" || ProjektName =="" ){ //Prüft ob wichtige Angaben vorhanden und gültig
        res.render('projektanlegenerror'); 
     }else{
-        db2.get(sql10, function(err, row){
-            if(err){
-               console.error(err);
-            }else{
-               res.render('Projektangelegt', {name : ProjektName});
-
-        db3.get(sql13, function(err, row){
+        db2.run(sql10, function(err){
             if(err){
                console.error(err);
             }
+        let sql13 = `INSERT INTO Bilder (FotoName, "Foto ID") VALUES ("${fileName}", (SELECT Nummer FROM Projekte WHERE Nummer = ${this.lastID}));`
+        db2.run(sql13, function(err){
+            if(err){
+               console.error(err);
+            }else{
+                res.render('Projektangelegt', {name : ProjektName});
+            }
             });
-        }}
+        }
     )};
     }});
     });
