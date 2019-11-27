@@ -27,6 +27,10 @@ html, body {
   margin-right: -20vh;
 }
 
+.main img[value="pics"]{
+  float: center;
+  margin-right: 25vh;
+}
 
 /*Schrift einstellen und für alle zugänglich machen*/
 @font-face { 

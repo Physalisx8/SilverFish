@@ -295,7 +295,7 @@ app.post('/doProjektwahl', function(req,res){
     const Projekt = req.body.Projektname;
     
 
-   let sql2 = `SELECT * FROM Projekte WHERE Name="${Projekt}"`; 
+   let sql2 = `SELECT * FROM Projekte INNER JOIN Bilder ON Projekte.Nummer = Bilder."Foto ID" WHERE Name="${Projekt}"`; 
    
    if(Projekt==""){
        res.render('Projekterror');

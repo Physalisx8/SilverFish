@@ -16,7 +16,7 @@
 <!--Header -->
 <div class= "header">
         <div class="img">
-            <img src="/ProjektBanner.png" alt="ProjektBanner">
+            <img src="/ProjektBanner2.png" alt="ProjektBanner">
         </div>
         </div>
         
@@ -43,16 +43,16 @@
     <p><%=Projekte[0].Beschreibung%></p><br><br>
 
     
-        
-    <img src="/<%=Projekte[0].FotoName %>" alt="Foto">
-
-
-    
+ 
+    <img value="pics" src="/<%=Projekte[0].FotoName %>" alt="Foto">
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <form action="/doProjektLoschen" method="POST">
           
            <button name= "trashB" style="font-size:24px"><i class="fa fa-trash-o"></i></button>
         </form>
     </div>
+
+  
     </body>
     </html>
 
