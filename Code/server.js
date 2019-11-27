@@ -321,7 +321,7 @@ app.get('/doProjektwahl/:Nummer', function(req,res){
    
     
 
-   let sql2 = `SELECT * FROM Projekte WHERE Nummer="${Nummer}"`; 
+   let sql2 = `SELECT * FROM Projekte INNER JOIN Bilder ON Projekte.Nummer = Bilder."Foto ID" WHERE Nummer="${Nummer}"`; 
  
         db2.all(sql2, function(err, rows){
             if(err){
@@ -339,7 +339,8 @@ app.get('/doProjektwahl/:Nummer', function(req,res){
 
 
 function ProjektAusgabefFunktion(Projekt){
-    let sql2 = `SELECT * FROM Projekte WHERE Name="${Projekt}"`; 
+    let sql2 = `SELECT * FROM Projekte INNER JOIN Bilder ON Projekte.Nummer = Bilder."Foto ID" WHERE Name="${Projekt}"`; 
+   // let sql13 = `SELECT * FROM Bilder WHERE (SELECT Nummer FROM Projekte WHERE Nummer = ${"Foto ID"})`
   
          db2.all(sql2, function(err, rows){
              if(err){
