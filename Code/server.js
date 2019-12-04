@@ -1,4 +1,9 @@
 /*Installation und Initialisierung aller Packages und Module (express, body-parser, ejs, sqlite, cookie-parser, express-session)*/
+
+
+/*Quellen: 
+Icon Library: https://www.w3schools.com/howto/howto_css_icon_bar.asp für die Navigation & den Mülleimer
+ */
 var formidable = require('formidable');
 var fs = require('fs');
 
@@ -105,7 +110,7 @@ app.get('/loschen', function(req,res){
     res.render('Projektsicherloschen');
 });
 
-//Ausgabe des Registrieren Formulars
+//Ausgabe des "Registrieren" Formulars
 app.get('/signup', function(req, res){
     //definiert die msg für die Fehlermeldung..
     res.render('signup',{msg:""});
@@ -119,8 +124,8 @@ app.get('/login', function(req,res){
 //LOGOUT
 app.get('/logout', function(req,res){
     req.session.destroy(function(err){
-});//leider übergibt er die Msg. nicht. Aber wayne.
-    res.render('main', {msgLogin: "Successfully logged out."});
+});
+    res.render('main');
 });
 
 //Ausgabe eines Projektes
@@ -175,7 +180,7 @@ app.get('/profilandern',function(req,res){
     res.render('profilandern');
 })
 
-//FächerJahre Übersicht - Diebstahlschutz
+// Übersicht von Projekten im bestimmten Fach - Diebstahlschutz
 app.get('/FaecherJahre', function(req,res){
     //if (typeof req.session.name !== 'undefined'){
         let sql = 'select * from Projekte'; 
@@ -194,13 +199,10 @@ app.get('/FaecherJahre', function(req,res){
             }
             res.render('FaecherJahre',{Projekte:Projekte});
         })      
-/* }
-else {
-    res.send('du bist icht eingeloggt');
-} */
+
 });
 
-//Ausgabe der AP Projekte
+//Ausgabe der Projekte in Angewandte Programmierung
 app.get('/AP', function(req, res){
     let sql = 'select * from Projekte'; 
         db2.all(sql,function(err,rows)
@@ -221,6 +223,7 @@ app.get('/AP', function(req, res){
         })
 });
 
+//Ausgabe der Projekte in Media-Game Design
 app.get('/MGD', function(req, res){
     let sql = 'select * from Projekte'; 
         db2.all(sql,function(err,rows){
@@ -246,16 +249,11 @@ app.get('/Files', function(req,res){
     res.sendfile(__dirname + "/Files.html");
   });
   
-//Alle die Projektjahren anzeigen
-app.get('/Jahren', function(req,res){
-    res.render('Jahren');
-});
  
 
 
 ///////////////////*AUSWERTUNGEN*/////////////////////////
 //Post Auswertung des logins
-
 app.post('/logmain', function(req,res){
     const name= req.body["name"];
     const password = req.body["password"];
@@ -275,7 +273,7 @@ app.post('/logmain', function(req,res){
                      res.render('Loginfehlername', {variable});
                  }else{
                      const dbpassword = rows[0].password;
-                     //Passwort und EIngabe im vergleich
+                     //Passwort und eingegebenes Passwort im Vergleich
                      if(password == dbpassword){
                          req.session["sessionVName"]= rows[0].name;
                          //für den Fall, dass man sich wundert -> req.body bzw req.session macht's möglich, dass dein Benutzername ausgegeben wird!... 
@@ -309,13 +307,13 @@ app.post('/doProjektwahl', function(req,res){
                 const variable = "Projekt";
                 res.render('Projekterror', {variable});
                 console.log("VOLL");
-            } else{//name doch vorhanden
+            } else{//Name doch vorhanden
                 res.render('Projektanzeigen',{Projekte:rows});
  }});
 });
 
 
-
+//Bildausgabe
 app.get('/doProjektwahl/:Nummer', function(req,res){
     const Nummer = req.params.Nummer;
    
@@ -452,17 +450,6 @@ app.post('/doProjektanlegen', function(req,res){
                         console.error(err);
                         res.send("Ein Fehler ist aufgetreten");
                     } 
-
-                //Test, muss vllt später gelöscht werden
-               // let sql500 = `SELECT * FROM Projekte WHERE Bild="${fileName}";`
-               /* let sql500 = `SELECT Bild CASE '${fileName}' THEN 'Already Exists' ELSE 'Does not Exist' END FROM Projekte WHERE Bild="${fileName}");`
-                db2.all(sql500,function(err, rows){
-                    
-                    if(rows.length!=0){
-                         res.send('BildDupe', {msgp: msgp});
-                         console.log(rows.length);
-                     }
-                    });*/
                 });  
             }
                 
@@ -490,7 +477,7 @@ app.post('/doProjektanlegen', function(req,res){
         }
     )};
     }});
-    });
+});
 
 
 
@@ -547,24 +534,3 @@ db.all(sql5,function(err, rows){
         }});
     }})
 });
-
-
-
-
- //Auswertung von der Fileupload in server
-/*app.post('/fileupload', function (req, res) {
-  
-    var form = new formidable.IncomingForm();
-    form.parse(req, function (err, fields, files) {
-      var oldpath = files.filetoupload.path;
-      var newpath = 'C:/Users/monav/Desktop/Uni/SilverFish/Code/public/public' + files.filetoupload.name;  //Name(Präfix) und speicher verzeichnis von Bild
-      fs.rename(oldpath, newpath, function (err) {
-        if (err) throw err;
-        res.write('File uploaded and moved!');
-        res.end();
-      });
- });
-});
-*/
-/////////////////*FUNKTIONEN*///////////////////////////////
-/* neue js. datei anlegen*/

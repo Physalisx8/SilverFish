@@ -2,65 +2,70 @@
 <html>
     <head>
         <meta charset="utf-8">
-    <link href="layout.css" rel="stylesheet" type="text/css"/>
-
- <!-- Load an icon library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="layout.css" rel="stylesheet" type="text/css"/>
+        <!-- Icons geklaut -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
+
     <body>
          
-<!--Header -->
-<div class= "header">
-    <div class="img">
-        <img src="BannerMain.png" alt="BannerMain">
-    </div>
+    <!--Header -->
+    <div class= "header">
+        <div class="img">
+            <img src="BannerMain.png" alt="BannerMain">
+        </div>
     </div>
             
     <!-- top navigation bar-->
     <div class="navbar">
-    <a href="projname"><i class="fa fa-fw fa-search"></i></a>
-    <a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a>
-    <a href="/logout"><i class="fa fa-sign-out"></i></a>
+        <a href="projname"><i class="fa fa-fw fa-search"></i></a>
+        <a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a>
+        <a href="/logout"><i class="fa fa-sign-out"></i></a>
     </div>
     
     
     <!-- Side navigation -->
     <div class="sidenav">
-    <a href="main">Main</a>
-    <a href="FaecherJahre">Fächer</a>  
-    <a href="Projektanlegen">Neues Projekt</a>
-    <a href="aboutus">About Us</a>
-  
+        <a href="main">Main</a>
+        <a href="FaecherJahre">Fächer</a>  
+        <a href="Projektanlegen">Neues Projekt</a>
+        <a href="aboutus">About Us</a>
     </div>
     
     <div class="main">
     
         <h1>Mein Profil ändern</h1>
-   
+        <!--ALLES REQUIRED -->
+        
         <form action="/doProfilandern" method="POST">
+            <!--Name ändern -> alter Name-->
             <p><label for="oN">Mein alter Name:</label></p>
-                <input type="text" id ="oN" name="ProfilName" required>
+            <input type="text" id ="oN" name="ProfilName" required>
 
-                <p><label for="nM">Neuer Name</label></p>
-                <input type="text" id="nN" name="ProfilNeuerName" required>
+            <!--Name ändern -> neuer Name -->
+            <p><label for="nM">Neuer Name</label></p>
+            <input type="text" id="nN" name="ProfilNeuerName" required>
 
-                <p><label for="emailn">Neue E-Mail</label><br></p>
-                <input type="email" name="ProfilMail" id="emailn" required>
-                
-            <p><label for="opw">Mein altes Passwort:</label><br>   </p>  
-                <input type="password" id="opw" name="ProfilAltesPasswort" required>
+            <!--neue E-Mail-->
+            <p><label for="emailn">Neue E-Mail</label><br></p>
+            <input type="email" name="ProfilMail" id="emailn" required>
+            
+            <!--altes Passwort-->
+            <p><label for="opw">Mein altes Passwort:</label><br></p>  
+            <input type="password" id="opw" name="ProfilAltesPasswort" required>
 
-                <p><label for="pass3">Mein neues Passwort (mind. 6 Zeichen):</label><br></p>
-                <p><input type="password" id="pass3" name="ProfilNeuesPasswort" minlength="6" required ><br></p>
+            <!--neues Passwort-->
+            <p><label for="pass3">Mein neues Passwort (mind. 6 Zeichen):</label><br></p>
+            <p><input type="password" id="pass3" name="ProfilNeuesPasswort" minlength="6" required ><br></p>
 
                 <div class="container">
                 <input type="submit" value="Speichern" name="Speichern">
             
         </form>
 
-        </div>
-        </body>
-    </html>
+    </div>
+</body>
+</html>
     
     
 

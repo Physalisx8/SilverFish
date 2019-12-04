@@ -1,59 +1,60 @@
 <!DOCTYPE html>
 <html>
-<!--Head-->
-<head>
+    <!--Head-->
+    <head>
+        <meta charset="utf-8">
+        <link href="/layout.css" rel="stylesheet" type="text/css"/>
 
-<meta charset="utf-8">
-<link href="/layout.css" rel="stylesheet" type="text/css"/>
+        <!-- Load an icon library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
 
- <!-- Load an icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-
-<!--Body-->
-<body>
- 
-<!--Header -->
-<div class= "header">
-        <div class="img">
-            <img src="/ProjektBanner2.png" alt="ProjektBanner">
-        </div>
-        </div>
-        
-<!-- top navigation bar-->
-<div class="navbar">
-<a href="/projname"><i class="fa fa-fw fa-search"></i></a>
-<a href="/MeinProfil"><i class="fa fa-fw fa-user"></i></a>
-<a href="/logout"><i class="fa fa-sign-out"></i></a>
-
-</div>
-
-<!-- Side navigation, wenn man eingeloggt ist, verschwindet man-->
-<div class="sidenav">
-    <a href="/main">Main</a>
-    <a href="/FaecherJahre">Fächer</a>
-    <a href="/Projektanlegen">Neues Projekt</a>
-     <a href="/aboutus">About Us</a>
-    </div>
-
-<div class="main">
-    <h1><div class="j"><%=Projekte[0].Name%></div></h1>
-    <p>Im Fach <%=Projekte[0].Fach%>
-    erstellt <%=Projekte[0].Jahr%></p>
-    <p><%=Projekte[0].Beschreibung%></p><br><br>
-
+    <!--Body-->
+    <body>
     
- 
-    <img value="pics" src="/<%=Projekte[0].FotoName %>" alt="Foto">
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <form action="/doProjektLoschen" method="POST">
-          
-           <button name= "trashB" style="font-size:24px"><i class="fa fa-trash-o"></i></button>
-        </form>
-    </div>
+        <!--Header -->
+        <div class= "header">
+            <div class="img">
+                <img src="/ProjektBanner2.png" alt="ProjektBanner">
+            </div>
+        </div>
+            
+        <!-- top navigation bar-->
+        <div class="navbar">
+            <a href="/projname"><i class="fa fa-fw fa-search"></i></a>
+            <a href="/MeinProfil"><i class="fa fa-fw fa-user"></i></a>
+            <a href="/logout"><i class="fa fa-sign-out"></i></a>
+        </div>
+
+        <!-- Side navigation-->
+        <div class="sidenav">
+            <a href="/main">Main</a>
+            <a href="/FaecherJahre">Fächer</a>
+            <a href="/Projektanlegen">Neues Projekt</a>
+            <a href="/aboutus">About Us</a>
+        </div>
+
+        <div class="main">
+            <!--Ausgabe der Projekte mit Zugriff auf Datenbank-->
+            <h1><div class="j"><%=Projekte[0].Name%></div></h1>
+            <p>Im Fach <%=Projekte[0].Fach%>
+            erstellt <%=Projekte[0].Jahr%></p>
+            <p><%=Projekte[0].Beschreibung%></p><br><br>
+
+            
+        <!--Ausgabe des zugeordneten Bildes-->
+            <img value="pics" src="/<%=Projekte[0].FotoName %>" alt="Foto">
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+        <!--Löschen von Projekten-->
+            <form action="/doProjektLoschen" method="POST">
+                <!--Löschbutton für Projekte-->
+                <button name= "trashB" style="font-size:24px"><i class="fa fa-trash-o"></i></button>
+            </form>
+        </div>
 
   
-    </body>
-    </html>
+</body>
+</html>
 
 

@@ -2,67 +2,76 @@
 <html>
     <head>
         <meta charset="utf-8">
-    <link href="layout.css" rel="stylesheet" type="text/css"/>
+        <link href="layout.css" rel="stylesheet" type="text/css"/>
 
- <!-- Load an icon library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Icons geklaut -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
+    
     <body>
-         
-<!--Header -->
-<div class= "header">
-    <div class="img">
-        <img src="BannerMain.png" alt="BannerMain">
-    </div>
+            
+    <!--Header -->
+    <div class= "header">
+      <div class="img">
+          <img src="BannerMain.png" alt="BannerMain">
+      </div>
     </div>
             
     <!-- top navigation bar-->
     <div class="navbar">
-    <a href="projname"><i class="fa fa-fw fa-search"></i></a>
-    <a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a>
-    <a href="/logout"><i class="fa fa-sign-out"></i></a>
+      <a href="projname"><i class="fa fa-fw fa-search"></i></a>
+      <a href="MeinProfil"><i class="fa fa-fw fa-user"></i></a>
+      <a href="/logout"><i class="fa fa-sign-out"></i></a>
     </div>
     
     
     <!-- Side navigation -->
     <div class="sidenav">
-    <a href="main">Main</a>
-    <a href="FaecherJahre">Fächer</a>  
-    <a href="Projektanlegen">Neues Projekt</a>
-    <a href="aboutus">About Us</a>
-  
+      <a href="main">Main</a>
+      <a href="FaecherJahre">Fächer</a>  
+      <a href="Projektanlegen">Neues Projekt</a>
+      <a href="aboutus">About Us</a>
     </div>
     
     <div class="main">
       <h1>Mein neues Projekt</h1>
+      <!--Projekte anlegen-->
       <form action="/doProjektanlegen" method="POST" enctype="multipart/form-data">
-  
+      <!-- Projektname -->
         <p><label for="pName">Projektname:</label><br></p>
-        <p><input type="text" id ="pName" name="ProjektName" required>
-        </p>
-        <div class="o"><%=msgp%></div>
-        <p>
+        <p><input type="text" id ="pName" name="ProjektName" required></p>
+
+        <!--Fehlermeldung: wenn der Projektname bereits besteht-->
+        <div class="o"><%=msgp%></div><p>
+        
+        <!--Radiobutton für Projektfach-->
         <div class="RButton" id="pFach" name="ProjektFach"  required>
-        <label for="pFach">Fach:</label>
-        <fieldset>
-          <input type="radio" id="AP" name="ProjektFach" value="AP">
-          <label for="AP"> Angewandte Programmierung</label> 
-          <input type="radio" id="MGD" name="ProjektFach" value="MGD">
-          <label for="MGD"> Media Game Design</label> 
-        </fieldset>
-      </div></p>
-  
-      <p><label for="year">Jahr:</label><br>
-      <input type="number" id="year" min="2010" max="2019" step="1" value="select" name="ProjektJahr" required> <br><br></p>
-  
-          <b>Beschreibung:</b><br>
-          Hier kannst du auch die Namen der mitwirkenden Studierenden angeben, falls diese das möchten.
-          So haben die anderen Studierenden die Möglichkeit sich über die HAW-Mail mit euch zu vernetzen.
-         <p><textarea required id="text" name="ProjektBeschreibung" cols="81" rows="10"></textarea></p> <br>
-  
+        <!--fieldset auswahl und Übergabe-->
+          <label for="pFach">Fach:</label>
+          <fieldset>
+            <input type="radio" id="AP" name="ProjektFach" value="AP">
+            <label for="AP"> Angewandte Programmierung</label> 
+            <input type="radio" id="MGD" name="ProjektFach" value="MGD">
+            <label for="MGD"> Media Game Design</label> 
+          </fieldset>
+        </div></p>
+      <!--Jahrauswahl mindestens 2010 max 2019 in 1 steps.-->
+        <p><label for="year">Jahr:</label><br>
+        <input type="number" id="year" min="2010" max="2019" step="1" value="select" name="ProjektJahr" required> <br><br></p>
+      
+      <!--Beschreibung für das Projekt in einer textarea-->
+        <b>Beschreibung:</b><br>
+        Hier kannst du auch die Namen der mitwirkenden Studierenden angeben, falls diese das möchten.
+        So haben die anderen Studierenden die Möglichkeit sich über die HAW-Mail mit euch zu vernetzen.
+        <p><textarea required id="text" name="ProjektBeschreibung" cols="81" rows="10"></textarea></p> 
+        <br>
+      
+      <!--Fileupload notwendig!-->
          <input type="file" name="filetoupload" required><p></p><br>
-         
+      
+      <!--Submit-->
          <input type="submit" value="Projekt anlegen">
-        </div>
-        </body>
-    </html>
+    </div>
+
+</body>
+</html>
